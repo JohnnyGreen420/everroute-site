@@ -251,7 +251,6 @@ export default function Home() {
   role="img"
   aria-label="Portrait of EverRoute founder Marc Cormier"
 />
-            </div>
             <div>
               <p className="eyebrow">Founder story</p>
               <h2>Built from real life - not a pitch deck.</h2>
