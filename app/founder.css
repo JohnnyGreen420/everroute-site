@@ -1,0 +1,16 @@
+.founder-photo {
+  min-height: 600px;
+  border: 1px solid rgba(49, 92, 140, 0.15);
+  border-radius: 28px;
+  background-image: url("/founder-marc-cormier.jpeg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 24px 60px rgba(34, 52, 73, 0.12);
+}
+
+@media (max-width: 640px) {
+  .founder-photo {
+    min-height: 460px;
+  }
+}
