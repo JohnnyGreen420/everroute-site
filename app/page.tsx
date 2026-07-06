@@ -111,7 +111,7 @@ export default function Home() {
                 </a>
               </div>
               <p className="status-line">
-                Currently building Haven, our flagship AI companion.
+                Currently building Haven, our flagship AI product.
               </p>
             </div>
 
@@ -178,7 +178,7 @@ export default function Home() {
               <p className="eyebrow eyebrow-light">Our flagship product</p>
               <h2>Meet Haven.</h2>
               <p>
-                Haven is an AI companion being built to remember what matters,
+                Haven is an personal AI product being built to remember what matters,
                 help organize everyday life, and provide a calm place to think,
                 plan, and follow through.
               </p>
@@ -246,12 +246,15 @@ export default function Home() {
 
         <section className="section founder-section">
           <div className="container founder-grid">
-            <div className="founder-placeholder" aria-label="Founder portrait placeholder">
-              <span>Founder portrait</span>
+            <div
+  className="founder-photo"
+  role="img"
+  aria-label="Portrait of EverRoute founder Marc Cormier"
+/>
             </div>
             <div>
               <p className="eyebrow">Founder story</p>
-              <h2>Built from real life—not a pitch deck.</h2>
+              <h2>Built from real life - not a pitch deck.</h2>
               <p>
                 EverRoute was founded by Marc Cormier, a Canadian technology
                 professional, husband, and father building products around a
@@ -260,7 +263,7 @@ export default function Home() {
               <p>
                 Modern life asks people to keep track of work, family
                 responsibilities, appointments, goals, ideas, health, and
-                hundreds of unfinished details—often across disconnected apps
+                hundreds of unfinished details - often across disconnected apps
                 and systems.
               </p>
               <blockquote>
