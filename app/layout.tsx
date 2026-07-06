@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./founder.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://everroute.ca"),
   title: {
-    default: "EverRoute — Thoughtful Technology for Real Life",
-    template: "%s — EverRoute",
+    default: "EverRoute - Thoughtful Technology for Real Life",
+    template: "%s - EverRoute",
   },
   description:
-    "EverRoute is a Canadian technology company building calm, practical AI products, including Haven, an AI companion designed for everyday life.",
+    "EverRoute is a Canadian technology company building calm, practical AI products, including Haven, a personal AI product designed for everyday life.",
   openGraph: {
-    title: "EverRoute — Thoughtful Technology for Real Life",
+    title: "EverRoute - Thoughtful Technology for Real Life",
     description:
       "A Canadian technology company building calm, practical AI products for everyday life.",
     url: "https://everroute.ca",
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "EverRoute — Thoughtful Technology for Real Life",
+    title: "EverRoute - Thoughtful Technology for Real Life",
     description:
       "A Canadian technology company building calm, practical AI products for everyday life.",
   },
