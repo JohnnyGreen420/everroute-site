@@ -178,7 +178,7 @@ export default function Home() {
               <p className="eyebrow eyebrow-light">Our flagship product</p>
               <h2>Meet Haven.</h2>
               <p>
-                Haven is an personal AI product being built to remember what matters,
+                Haven is a personal AI product being built to remember what matters,
                 help organize everyday life, and provide a calm place to think,
                 plan, and follow through.
               </p>
