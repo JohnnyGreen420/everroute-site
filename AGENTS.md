@@ -130,22 +130,22 @@ For the current baseline, use:
 
 ```bash
 npm ci
+npm run lint
 npx --no-install tsc --noEmit
 npm run build
 git diff --check
 git status --short --branch
 ```
 
-### Lint limitation
+### Lint
 
-On the current `main` baseline, the `lint` script is `next lint`. That command is not valid under Next.js 16.
+The current baseline configures the ESLint CLI through `eslint.config.mjs`, and the `lint` script runs `eslint .`.
 
 Therefore:
 
-- do not claim `npm run lint` passed on a branch where it still invokes `next lint`
+- run `npm run lint` as part of the applicable validation
 - do not silently add or change lint tooling unless lint repair is part of the approved task
-- if the current branch contains a reviewed ESLint CLI configuration and a valid `lint` script, run `npm run lint`
-- otherwise report lint as unavailable on that branch
+- if a future branch does not contain a reviewed ESLint CLI configuration and a valid `lint` script, report lint as unavailable on that branch
 
 Do not claim a validation passed unless the command was actually run and completed successfully.
 
