@@ -29,5 +29,11 @@ jobs:
       - name: Install dependencies
         run: npx --yes npm@11.11.1 ci
 
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
+
       - name: Build site
         run: npm run build

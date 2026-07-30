@@ -131,7 +131,7 @@ For the current baseline, use:
 ```bash
 npm ci
 npm run lint
-npx --no-install tsc --noEmit
+npm run typecheck
 npm run build
 git diff --check
 git status --short --branch
