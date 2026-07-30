@@ -32,16 +32,16 @@ The site is available at `http://localhost:3000`.
 
 - `npm run dev` starts the Next.js development server.
 - `npm run lint` checks the repository with ESLint.
+- `npm run typecheck` checks the repository with TypeScript.
 - `npm run build` creates the production static export.
 - `npm run start` invokes the Next.js production server. This is not the normal
   preview path for this repository because the site is configured as a static
   export.
 
-There is no dedicated test or type-check script. For a standalone TypeScript
-check, run:
+There is no dedicated test script. To run the TypeScript check separately, use:
 
 ```sh
-npx --no-install tsc --noEmit
+npm run typecheck
 ```
 
 ## Static export and deployment
@@ -72,7 +72,7 @@ Before opening a pull request, run:
 ```sh
 npm ci
 npm run lint
-npx --no-install tsc --noEmit
+npm run typecheck
 npm run build
 git diff --check
 ```
