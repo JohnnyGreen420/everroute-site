@@ -8,6 +8,9 @@
 # production
 /build
 
+# TypeScript
+/tsconfig.tsbuildinfo
+
 # local environment
 .env*
 !.env.example
