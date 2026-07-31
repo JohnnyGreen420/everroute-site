@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s - EverRoute",
   },
   description:
-    "EverRoute is a Canadian technology company building calm, practical AI products, including Haven, a personal AI product designed for everyday life.",
+    "EverRoute is a Canadian technology company building calm, practical AI products, including Haven, a private AI assistant for family life.",
   openGraph: {
     title: "EverRoute - Thoughtful Technology for Real Life",
     description:
