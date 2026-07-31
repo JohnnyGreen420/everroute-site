@@ -270,9 +270,9 @@ export default function Home() {
                 some of life’s mental load without taking control away from the
                 person?
               </blockquote>
-              <a className="text-link" href="#contact">
-                Read the EverRoute story
-              </a>
+              <span className="text-link">
+                Founder story coming soon
+              </span>
             </div>
           </div>
         </section>
