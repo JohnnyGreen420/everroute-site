@@ -17,10 +17,10 @@ const principles = [
 ];
 
 const havenFeatures = [
-  "Memory with context",
-  "Everyday organization",
-  "A calmer interaction",
-  "Designed for real households",
+  "Trusted household memory",
+  "Family plans, tasks, and routines",
+  "Information people can review",
+  "Private by design",
 ];
 
 const buildPrinciples = [
@@ -111,7 +111,7 @@ export default function Home() {
                 </a>
               </div>
               <p className="status-line">
-                Currently building Haven, our flagship AI product.
+                Currently building Haven, a private AI assistant for family life.
               </p>
             </div>
 
@@ -126,10 +126,10 @@ export default function Home() {
                   <p className="product-kicker">Good evening</p>
                   <h2>What would help right now?</h2>
                   <div className="product-action-grid">
-                    <span>Talk to Haven</span>
-                    <span>Plan my day</span>
-                    <span>Remember something</span>
-                    <span>Check in</span>
+                    <span>Capture something</span>
+                    <span>Plan the week</span>
+                    <span>Remember a detail</span>
+                    <span>Review family updates</span>
                   </div>
                 </div>
               </div>
@@ -178,9 +178,9 @@ export default function Home() {
               <p className="eyebrow eyebrow-light">Our flagship product</p>
               <h2>Meet Haven.</h2>
               <p>
-                Haven is a personal AI product being built to remember what matters,
-                help organize everyday life, and provide a calm place to think,
-                plan, and follow through.
+                Haven is a private AI assistant for family life, being built to help
+                households capture what matters, review shared information, organize
+                plans and routines, and recall important details when they are needed.
               </p>
               <ul className="feature-list">
                 {havenFeatures.map((feature) => (
