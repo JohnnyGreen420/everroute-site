@@ -558,6 +558,11 @@ input:focus-visible {
   text-decoration: none;
 }
 
+.status-text {
+  color: var(--subtle);
+  font-weight: 700;
+}
+
 .build-list {
   margin-top: 62px;
   border-top: 1px solid var(--line);
@@ -612,7 +617,8 @@ input:focus-visible {
   min-height: 390px;
 }
 
-.note-card .text-link {
+.note-card .text-link,
+.note-card .status-text {
   display: inline-block;
   margin-top: 30px;
 }
