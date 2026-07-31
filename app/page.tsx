@@ -393,7 +393,7 @@ export default function Home() {
           </div>
         </div>
         <div className="container footer-bottom">
-          <span>© 2026 Everroute Inc. All rights reserved.</span>
+          <span>© 2026 EverRoute Inc. All rights reserved.</span>
         </div>
       </footer>
     </main>
