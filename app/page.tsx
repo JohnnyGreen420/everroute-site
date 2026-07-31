@@ -314,7 +314,7 @@ export default function Home() {
                   <p className="note-meta">{note.meta}</p>
                   <h3>{note.title}</h3>
                   <p>{note.excerpt}</p>
-                  <span className="text-link">Read the note</span>
+                  <span className="text-link">Coming soon</span>
                 </article>
               ))}
             </div>
