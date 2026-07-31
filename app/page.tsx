@@ -270,7 +270,7 @@ export default function Home() {
                 some of life’s mental load without taking control away from the
                 person?
               </blockquote>
-              <span className="text-link">
+              <span className="status-text">
                 Founder story coming soon
               </span>
             </div>
@@ -314,7 +314,7 @@ export default function Home() {
                   <p className="note-meta">{note.meta}</p>
                   <h3>{note.title}</h3>
                   <p>{note.excerpt}</p>
-                  <span className="text-link">Coming soon</span>
+                  <span className="status-text">Coming soon</span>
                 </article>
               ))}
             </div>
