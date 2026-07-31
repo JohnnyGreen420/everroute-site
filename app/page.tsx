@@ -357,7 +357,7 @@ export default function Home() {
               </p>
             </div>
             <div className="contact-actions">
-              <a className="button button-primary" href="mailto:marc@heyhaven.ca">
+              <a className="button button-primary" href="mailto:hello@everroute.ca">
                 Contact EverRoute
               </a>
               <a className="button button-secondary" href="https://heyhaven.ca">
