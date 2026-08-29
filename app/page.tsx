@@ -41,29 +41,8 @@ const buildPrinciples = [
   },
   {
     number: "04",
-    title: "Build, test, and learn openly",
-    body: "Meaningful lessons and progress become part of EverRoute Build Notes.",
-  },
-];
-
-const buildNotes = [
-  {
-    title: "Why I’m Building Haven",
-    excerpt:
-      "The real-life problem behind Haven and the kind of personal technology I believe should exist.",
-    meta: "Founder note · 6 min read",
-  },
-  {
-    title: "What Thoughtful AI Means at EverRoute",
-    excerpt:
-      "A practical definition of calm design, human control, usefulness, and trust.",
-    meta: "Principles · 5 min read",
-  },
-  {
-    title: "Building Memory Without Taking Control",
-    excerpt:
-      "The challenge of making AI more continuous while keeping people involved in what it remembers.",
-    meta: "Product thinking · 7 min read",
+    title: "Build, test, and learn",
+    body: "We work in small steps, test what matters, and apply what we learn.",
   },
 ];
 
@@ -79,10 +58,9 @@ export default function Home() {
           <a className="wordmark" href="#top" aria-label="EverRoute home">
             EverRoute
           </a>
-          <nav className="desktop-nav" aria-label="Primary navigation">
+          <nav className="primary-nav" aria-label="Primary navigation">
             <a href="#about">About</a>
             <a href="#haven">Haven</a>
-            <a href="#notes">Build Notes</a>
             <a href="#contact">Contact</a>
           </nav>
           <a className="button button-primary nav-cta" href="https://heyhaven.ca">
@@ -105,9 +83,6 @@ export default function Home() {
               <div className="button-row">
                 <a className="button button-primary" href="https://heyhaven.ca">
                   Explore Haven
-                </a>
-                <a className="button button-secondary" href="#notes">
-                  Follow the build
                 </a>
               </div>
               <p className="status-line">
@@ -270,9 +245,6 @@ export default function Home() {
                 some of life’s mental load without taking control away from the
                 person?
               </blockquote>
-              <span className="status-text">
-                Founder story coming soon
-              </span>
             </div>
           </div>
         </section>
@@ -291,57 +263,6 @@ export default function Home() {
                   <p>{item.body}</p>
                 </article>
               ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="notes" className="section notes-section">
-          <div className="container">
-            <div className="section-heading-row">
-              <div>
-                <p className="eyebrow">Build Notes</p>
-                <h2>Follow what we are learning.</h2>
-              </div>
-              <p>
-                Decisions, experiments, and lessons from building Haven and a
-                thoughtful AI company.
-              </p>
-            </div>
-
-            <div className="notes-grid">
-              {buildNotes.map((note) => (
-                <article className="note-card" key={note.title}>
-                  <p className="note-meta">{note.meta}</p>
-                  <h3>{note.title}</h3>
-                  <p>{note.excerpt}</p>
-                  <span className="status-text">Coming soon</span>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="newsletter-section">
-          <div className="container newsletter-grid">
-            <div>
-              <p className="eyebrow eyebrow-light">EverRoute Build Notes</p>
-              <h2>Follow the journey from idea to product.</h2>
-              <p>
-                Occasional notes about building Haven, designing thoughtful AI,
-                and growing EverRoute.
-              </p>
-            </div>
-            <div className="newsletter-form-placeholder">
-              <label htmlFor="email">Email address</label>
-              <div>
-                <input id="email" type="email" placeholder="you@example.com" disabled />
-                <button type="button" disabled>
-                  Coming soon
-                </button>
-              </div>
-              <small>
-                Signup integration will be connected before launch.
-              </small>
             </div>
           </div>
         </section>
@@ -378,7 +299,6 @@ export default function Home() {
           <div>
             <strong>Company</strong>
             <a href="#about">About</a>
-            <a href="#notes">Build Notes</a>
             <a href="#contact">Contact</a>
           </div>
           <div>
@@ -386,14 +306,9 @@ export default function Home() {
             <a href="https://heyhaven.ca">Haven</a>
             <a href="https://tally.so/r/2EoJ9V">Haven waitlist</a>
           </div>
-          <div>
-            <strong>Legal</strong>
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
-          </div>
         </div>
         <div className="container footer-bottom">
-          <span>© 2026 EverRoute Inc. All rights reserved.</span>
+          <span>© 2026 EverRoute. All rights reserved.</span>
         </div>
       </footer>
     </main>
