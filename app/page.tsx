@@ -58,14 +58,14 @@ export default function Home() {
           <a className="wordmark" href="#top" aria-label="EverRoute home">
             EverRoute
           </a>
-          <a className="button button-primary nav-cta" href="https://heyhaven.ca">
-            Explore Haven
-          </a>
           <nav className="primary-nav" aria-label="Primary navigation">
             <a href="#about">About</a>
             <a href="#haven">Haven</a>
             <a href="#contact">Contact</a>
           </nav>
+          <a className="button button-primary nav-cta" href="https://heyhaven.ca">
+            Explore Haven
+          </a>
         </div>
       </header>
 
