@@ -2,13 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { ActionLink } from "./components/ActionLink";
 import { ContactBand } from "./components/ContactBand";
+import { FounderQuestion } from "./components/FounderQuestion";
+import { GroundLine } from "./components/GroundLine";
+import { NowBuilding } from "./components/NowBuilding";
 import { PrincipleList } from "./components/PrincipleList";
 import { ProductIndex } from "./components/ProductIndex";
 import { Register } from "./components/Register";
 import { SectionHeading } from "./components/SectionHeading";
 import { commitments } from "./content/principles";
 import { products } from "./content/products";
-import { site } from "./content/site";
+import { founder, site } from "./content/site";
 import styles from "./page.module.css";
 
 // The homepage is a cross-section. The light surface carries what people see:
@@ -19,39 +22,30 @@ export default function Home() {
     <>
       <section className={styles.hero} aria-labelledby="hero-title">
         <div className="container">
-          <p className="label">EverRoute · {site.location}</p>
-          <h1 id="hero-title" className={styles.heroTitle}>
+          <p className="label">{site.location}</p>
+          <h1 id="hero-title" className={`headline ${styles.heroTitle}`}>
             Thoughtful technology, designed to grow with people over time.
           </h1>
           <p className={`lead ${styles.heroLead}`}>
-            EverRoute is a Canadian technology company. We start from a real
-            human need, keep important decisions with people, and treat privacy
-            as part of the architecture, not something added later.
+            EverRoute is a Canadian technology company building calm, practical
+            AI products, including Haven, a private AI assistant for family
+            life.
           </p>
-          <div className={styles.heroActions}>
+          <div className={`actions ${styles.heroActions}`}>
             <ActionLink href="/#products">See what we’re building</ActionLink>
             <ActionLink href="/company/" variant="secondary">
               About EverRoute
             </ActionLink>
           </div>
         </div>
-        <div className={styles.ground} aria-hidden="true" />
+        <GroundLine draw className={styles.ground} />
         <div className="container">
           <Register
             items={[
+              { term: "Now building", detail: <NowBuilding /> },
+              { term: "Founder", detail: site.founder },
               {
-                term: "Now building",
-                detail: products.map((product, i) => (
-                  <span key={product.id}>
-                    {i > 0 ? "; " : null}
-                    <a href={`#${product.id}`}>{product.name}</a>,{" "}
-                    {product.status.toLowerCase()}
-                  </span>
-                )),
-              },
-              { term: "Based in", detail: site.location },
-              {
-                term: "Inquiries",
+                term: "Contact",
                 detail: <a href={`mailto:${site.email}`}>{site.email}</a>,
               },
             ]}
@@ -77,7 +71,7 @@ export default function Home() {
       <div className={`on-night ${styles.beneath}`}>
         <section
           id="approach"
-          className="section"
+          className={`section ${styles.approach}`}
           aria-labelledby="approach-title"
         >
           <div className="container">
@@ -105,45 +99,27 @@ export default function Home() {
         <section className="section" aria-labelledby="founder-title">
           <div className="container">
             <SectionHeading id="founder-title" index="03" label="Founder">
-              The question behind EverRoute
+              {site.founder}
             </SectionHeading>
             <div className={`offset ${styles.founder}`}>
-              <figure className={styles.question}>
-                <blockquote>
+              <FounderQuestion />
+              <div className={styles.founderRow}>
+                {/* Decorative here: the founder is named in the heading above. */}
+                <Image
+                  className={styles.portrait}
+                  src="/marc-cormier-288.jpg"
+                  alt=""
+                  width={288}
+                  height={384}
+                />
+                <div className={styles.founderCopy}>
+                  <p>{founder.bio}</p>
                   <p>
-                    What would personal technology look like if it helped carry
-                    some of life’s mental load without taking control away from
-                    the person?
+                    <Link className="text-link tap-target" href="/company/">
+                      About EverRoute and its founder
+                    </Link>
                   </p>
-                </blockquote>
-                <figcaption className={styles.byline}>
-                  <Image
-                    className={styles.portrait}
-                    src="/marc-cormier-900.jpg"
-                    alt=""
-                    width={900}
-                    height={1200}
-                    sizes="96px"
-                  />
-                  <span>
-                    <span className={styles.bylineName}>{site.founder}</span>
-                    <span className={styles.bylineRole}>
-                      Founder, EverRoute
-                    </span>
-                  </span>
-                </figcaption>
-              </figure>
-              <div className={styles.founderCopy}>
-                <p>
-                  EverRoute was founded by {site.founder}, a Canadian technology
-                  professional, husband, and father building products around a
-                  problem he experiences personally.
-                </p>
-                <p>
-                  <Link className="text-link" href="/company/">
-                    About EverRoute and its founder
-                  </Link>
-                </p>
+                </div>
               </div>
             </div>
           </div>

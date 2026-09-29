@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
 import { site } from "./site";
 
+export const homeTitle =
+  "EverRoute · Thoughtful technology, designed to grow with people over time";
+
 const socialImage = {
   url: "/og-image.png",
   width: 1200,
   height: 630,
-  alt: "EverRoute — independent technology company, New Brunswick, Canada",
+  alt: "EverRoute, New Brunswick, Canada. A Canadian technology company now building Haven, a private AI assistant for family life.",
 };
 
 type PageMetadataInput = {
-  title: string;
+  // Short page title, e.g. "Company". Omit for the homepage.
+  title?: string;
   description: string;
   path: string;
 };
@@ -21,11 +25,14 @@ export function pageMetadata({
   description,
   path,
 }: PageMetadataInput): Metadata {
+  const socialTitle = title ? `${title} · ${site.name}` : homeTitle;
+
   return {
+    ...(title ? { title } : {}),
     description,
     alternates: { canonical: path },
     openGraph: {
-      title,
+      title: socialTitle,
       description,
       url: path,
       siteName: site.name,
@@ -35,7 +42,7 @@ export function pageMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: socialTitle,
       description,
       images: [socialImage.url],
     },

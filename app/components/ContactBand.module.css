@@ -19,9 +19,10 @@
 
 .email {
   width: fit-content;
+  padding-block: 0.3em;
   max-width: 100%;
   color: var(--on-night);
-  font-family: var(--font-serif);
+  font-family: var(--face-display);
   font-size: clamp(1.75rem, 1rem + 3.4vw, 3.75rem);
   line-height: 1.1;
   text-decoration-line: underline;

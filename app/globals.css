@@ -1,4 +1,5 @@
-@import "tailwindcss";
+/* Preflight and theme only; the site does not use Tailwind utility classes. */
+@import "tailwindcss" source(none);
 
 /*
  * EverRoute design tokens.
@@ -10,12 +11,11 @@
   /* Surfaces */
   --canvas: #f7f5f0; /* Warm White */
   --paper: #ffffff; /* Paper White */
-  --canvas-deep: #efece4;
   --night: #111111; /* Root Black */
-  --night-raised: #1a1a19;
 
   /* Text on light surfaces */
   --ink: #111111; /* 17.3:1 on canvas */
+  --ink-hover: #2b2a28;
   --ink-2: #4a4946; /* Graphite, 8.3:1 */
   --ink-3: #6b6964; /* metadata, 5.0:1 */
 
@@ -31,16 +31,15 @@
 
   /* Accent: used sparingly, never as the only carrier of meaning */
   --accent: #b38b42; /* Muted Gold, 6.0:1 on night; decorative only on light */
-  --accent-ink: #7a5c25; /* gold for small text on light, 5.7:1 */
 
   /* Type */
-  --font-serif:
-    var(--font-display), "Libre Bodoni", Georgia, "Times New Roman", serif;
-  --font-ui:
-    var(--font-sans), Inter, ui-sans-serif, system-ui, -apple-system,
+  --face-display:
+    var(--font-bodoni), "Libre Bodoni", Georgia, "Times New Roman", serif;
+  --face-ui:
+    var(--font-inter), Inter, ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
 
-  --text-hero: clamp(2.375rem, 1.45rem + 4.6vw, 5.75rem);
+  --text-hero: clamp(2.375rem, 1.45rem + 4.2vw, 5.5rem);
   --text-display: clamp(2.125rem, 1.5rem + 2.4vw, 3.5rem);
   --text-title: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
   --text-lead: clamp(1.125rem, 1.03rem + 0.4vw, 1.3125rem);
@@ -62,7 +61,7 @@
   --page-max: 1240px;
   --gutter: clamp(1rem, 0.4rem + 3vw, 2.5rem);
   --measure: 38rem;
-  --header-h: 0px; /* header is only sticky from 720px */
+  --header-h: 0px; /* sticky header height; set only where it is sticky */
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -70,7 +69,7 @@
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-@media (min-width: 720px) {
+@media (min-width: 720px) and (min-height: 540px) {
   :root {
     --header-h: 72px;
   }
@@ -84,11 +83,13 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   min-height: 100vh;
   background: var(--canvas);
   color: var(--ink);
-  font-family: var(--font-ui);
+  font-family: var(--face-ui);
   font-size: var(--text-body);
   line-height: 1.65;
   font-optical-sizing: auto;
@@ -101,6 +102,10 @@ a {
   color: inherit;
 }
 
+:where(p, li, dd) {
+  text-wrap: pretty;
+}
+
 ::selection {
   background: var(--ink);
   color: var(--canvas);
@@ -109,7 +114,6 @@ a {
 :focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
-  border-radius: 2px;
 }
 
 .on-night :focus-visible,
@@ -140,6 +144,10 @@ a {
   outline-offset: 2px;
 }
 
+main {
+  flex: 1 0 auto;
+}
+
 main:focus {
   outline: none;
 }
@@ -155,6 +163,26 @@ main:focus {
 
 .section {
   padding-block: var(--section-y);
+}
+
+/* A row of ActionLinks; they stack at full width on narrow phones. */
+:where(.actions) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+@media (max-width: 479px) {
+  :where(.actions) > * {
+    flex: 1 1 100%;
+  }
+}
+
+/* Enlarges a standalone text link's hit area to 44px+ without moving layout. */
+.tap-target {
+  display: inline-block;
+  padding-block: 0.75rem;
+  margin-block: -0.75rem;
 }
 
 /* Aligns content with the title column of a SectionHeading (3/12 offset). */
@@ -203,11 +231,21 @@ main:focus {
 
 :where(.display) {
   margin: 0;
-  font-family: var(--font-serif);
+  font-family: var(--face-display);
   font-size: var(--text-display);
   font-weight: 400;
   letter-spacing: -0.01em;
-  line-height: 1.06;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+/* Serif headline for H1s; pages set the size. */
+:where(.headline) {
+  margin: 0;
+  font-family: var(--face-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
   text-wrap: balance;
 }
 
@@ -238,7 +276,7 @@ main:focus {
   color: var(--ink);
   font-weight: 540;
   text-decoration-line: underline;
-  text-decoration-color: var(--rule);
+  text-decoration-color: var(--ink-3);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.3em;
   transition: text-decoration-color 160ms var(--ease);
@@ -246,11 +284,12 @@ main:focus {
 
 .text-link:hover {
   text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
 }
 
 .on-night .text-link {
   color: var(--on-night);
-  text-decoration-color: var(--rule-night);
+  text-decoration-color: var(--on-night-3);
 }
 
 .on-night .text-link:hover {

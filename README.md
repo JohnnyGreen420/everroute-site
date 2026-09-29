@@ -52,9 +52,10 @@ Next.js image optimization for static hosting. `npm run build` writes the
 deployable site to `out/`.
 
 The GitHub Actions build workflow installs from `package-lock.json` with
-`npm ci` and runs `npm run build`. Cloudflare Pages should use `npm run build`
-as its build command and `out` as its output directory. See
-`docs/cloudflare-preview.md` for the existing preview note.
+`npm ci`, then runs lint, typecheck, `npm run build`, and `npm test`.
+Cloudflare Pages should use `npm run build` as its build command and `out` as
+its output directory. See `docs/cloudflare-preview.md` for the existing preview
+note.
 
 ## Design system
 
@@ -71,10 +72,10 @@ once the final vectors exist; do not draw root artwork in code.
 
 - `app/` contains the active App Router pages (`/`, `/company/`, and the 404
   page), the root layout, and global design tokens in `app/globals.css`.
-- `app/components/` holds the shared components, each with a CSS module.
-- `app/content/` holds site facts, the product index, principles, and page
-  metadata. Add a product to `app/content/products.ts` only once it has an
-  approved public description.
+- `app/components/` holds the shared components, most with a CSS module.
+- `app/content/` holds site facts, founder copy, the product index,
+  principles, and page metadata. Add a product to `app/content/products.ts`
+  only once it has an approved public description.
 - `app/fonts/` holds the self-hosted font files and their licences.
 - `tests/` holds the static-export checks run by `npm test`.
 - `public/` contains static assets copied into the export.

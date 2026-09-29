@@ -1,7 +1,8 @@
 // Public product index. Add a product here only once it has an approved
 // public description; internal projects stay out until then.
 
-export type ProductStatus = "In development" | "Available";
+// Add further states only once each has an approved public presentation.
+export type ProductStatus = "In development";
 
 export type ProductLink = {
   label: string;

@@ -1,16 +1,20 @@
 .footer {
   background: var(--night);
   color: var(--on-night);
-  padding-block: var(--space-7) var(--space-4);
+  padding-block: var(--space-4);
 }
 
 .top {
   display: grid;
   gap: var(--space-6);
+  border-top: 1px solid var(--rule-night);
+  padding-top: var(--space-5);
 }
 
 .home {
-  display: inline-block;
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
   color: var(--on-night);
   text-decoration: none;
 }
@@ -45,6 +49,7 @@
   display: inline-flex;
   min-height: 44px;
   align-items: center;
+  gap: 0.3em;
   color: var(--on-night-2);
   text-decoration: none;
   overflow-wrap: anywhere;
@@ -76,7 +81,13 @@
 
 @media (min-width: 640px) {
   .columns {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, max-content);
+    column-gap: var(--space-5);
+  }
+
+  .columns a {
+    overflow-wrap: normal;
+    white-space: nowrap;
   }
 
   .contact {
@@ -86,7 +97,8 @@
 
 @media (min-width: 1024px) {
   .top {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: start;
+    column-gap: var(--space-6);
   }
 }

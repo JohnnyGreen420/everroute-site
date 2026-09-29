@@ -5,8 +5,9 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const OUT = path.resolve("out");
+const OUT = fileURLToPath(new URL("../out/", import.meta.url));
 const SITE_URL = "https://everroute.ca";
 
 const PAGES = {
@@ -14,6 +15,29 @@ const PAGES = {
   "/company/": "company/index.html",
   "/404": "404.html",
 };
+
+// Claims and phrasing the site must not use (see AGENTS.md and the brand
+// system's voice rules).
+const BANNED = [
+  /revolutionar/i,
+  /game[- ]chang/i,
+  /cutting[- ]edge/i,
+  /world[- ]class/i,
+  /unleash/i,
+  /synergy/i,
+  /disrupt/i,
+  /the future is here/i,
+  /coming soon/i,
+  /learn more/i,
+  /get started/i,
+  /\bInc\b\.?/,
+  /Everroute/, // brand is always "EverRoute"
+  /\bindependent\b/i, // not a published fact about the company
+  /\bAlex\b/, // no household details on the public site
+  // Lines that implied unannounced products or an undocumented standard.
+  /far enough along/i,
+  /company standard/i,
+];
 
 function readPage(file) {
   const full = path.join(OUT, file);
@@ -31,13 +55,20 @@ function markup(html) {
     .replace(/<style\b[\s\S]*?<\/style>/gi, "");
 }
 
-function visibleText(html) {
-  return markup(html)
-    .replace(/<head\b[\s\S]*?<\/head>/i, "")
-    .replace(/<[^>]+>/g, " ")
+function decode(text) {
+  return text
     .replace(/&amp;/g, "&")
     .replace(/&#x27;|&#39;|&rsquo;|’/g, "'")
-    .replace(/&nbsp;/g, " ")
+    .replace(/&quot;/g, '"')
+    .replace(/&nbsp;/g, " ");
+}
+
+function visibleText(html) {
+  return decode(
+    markup(html)
+      .replace(/<head\b[\s\S]*?<\/head>/i, "")
+      .replace(/<[^>]+>/g, " "),
+  )
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -64,6 +95,28 @@ function meta(html, key) {
     ),
   );
   return m ? m[1] : null;
+}
+
+// Text a visitor or a link preview can see, beyond the body copy.
+function metadataText(html) {
+  const title = html.match(/<title>([^<]*)<\/title>/)?.[1] ?? "";
+  const metaContent = [...html.matchAll(/<meta[^>]+content="([^"]*)"/gi)].map(
+    (m) => m[1],
+  );
+  const labels = [
+    ...markup(html).matchAll(/\s(?:alt|aria-label)="([^"]*)"/g),
+  ].map((m) => m[1]);
+  return decode([title, ...metaContent, ...labels].join(" "));
+}
+
+// Maps a site URL (absolute on everroute.ca, or root-relative) to a file in out/.
+function outFile(url) {
+  const pathname = url.replace(SITE_URL, "").split(/[?#]/)[0];
+  const relative = decodeURIComponent(pathname).replace(/^\//, "");
+  return path.join(
+    OUT,
+    relative.endsWith("/") || !relative ? `${relative}index.html` : relative,
+  );
 }
 
 for (const [route, file] of Object.entries(PAGES)) {
@@ -150,28 +203,29 @@ for (const [route, file] of Object.entries(PAGES)) {
     }
   });
 
+  test(`${route}: referenced assets exist`, () => {
+    const html = readPage(file);
+    const urls = [
+      ...tags(html, "img").map((img) => attr(img, "src")),
+      ...tags(html, "link")
+        .filter((l) => /icon|stylesheet|preload/.test(attr(l, "rel") ?? ""))
+        .map((l) => attr(l, "href")),
+      meta(html, "og:image"),
+      meta(html, "twitter:image"),
+    ].filter(Boolean);
+    assert.ok(urls.length > 0, "found asset references");
+    for (const url of urls) {
+      if (/^https?:/.test(url) && !url.startsWith(SITE_URL)) {
+        assert.fail(`third-party asset ${url}`);
+      }
+      assert.ok(existsSync(outFile(url)), `missing asset ${url}`);
+    }
+  });
+
   test(`${route}: copy guardrails`, () => {
-    const text = visibleText(readPage(file));
-    const banned = [
-      /revolutionar/i,
-      /game[- ]chang/i,
-      /cutting[- ]edge/i,
-      /world[- ]class/i,
-      /unleash/i,
-      /synergy/i,
-      /disrupt/i,
-      /the future is here/i,
-      /coming soon/i,
-      /learn more/i,
-      /get started/i,
-      /\bInc\b\.?/,
-      /Everroute/, // brand is always "EverRoute"
-      /\bAlex\b/, // no household details on the public site
-      // Lines that implied unannounced products or an undocumented standard.
-      /far enough along/i,
-      /company standard/i,
-    ];
-    for (const pattern of banned) {
+    const html = readPage(file);
+    const text = `${visibleText(html)} ${metadataText(html)}`;
+    for (const pattern of BANNED) {
       assert.doesNotMatch(text, pattern);
     }
   });
@@ -202,6 +256,17 @@ test("home and company: contact route is visible", () => {
   }
 });
 
+test("company: primary navigation marks the current page", () => {
+  const html = readPage("company/index.html");
+  const current = tags(html, "a").filter(
+    (a) => attr(a, "aria-current") === "page",
+  );
+  assert.ok(current.length > 0, "a link has aria-current=page");
+  for (const a of current) {
+    assert.equal(attr(a, "href"), "/company/");
+  }
+});
+
 test("canonical URLs and social cards", () => {
   for (const [route, file] of Object.entries(PAGES)) {
     if (route === "/404") continue;
@@ -215,4 +280,11 @@ test("canonical URLs and social cards", () => {
     assert.equal(meta(html, "twitter:card"), "summary_large_image");
     assert.ok(meta(html, "twitter:image"), `${route} twitter:image`);
   }
+});
+
+test("404: not indexed and not presented as another page", () => {
+  const html = readPage("404.html");
+  assert.match(meta(html, "robots") ?? "", /noindex/);
+  assert.doesNotMatch(html, /<link[^>]+rel="canonical"/);
+  assert.equal(meta(html, "og:url"), null, "no og:url on the 404 page");
 });

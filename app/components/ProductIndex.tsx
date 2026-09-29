@@ -17,7 +17,7 @@ export function ProductIndex({ products }: ProductIndexProps) {
       {products.map((product, i) => (
         <li key={product.id} id={product.id} className={styles.entry}>
           <div className={styles.identity}>
-            <p className="label">
+            <p className={styles.kicker}>
               {numbered ? `${String(i + 1).padStart(2, "0")} · ` : null}
               An EverRoute product
             </p>
@@ -35,7 +35,7 @@ export function ProductIndex({ products }: ProductIndexProps) {
 
             <div>
               <p className="label" id={`${product.id}-focus`}>
-                Being built for
+                Focus areas
               </p>
               <ul
                 className={styles.focus}
@@ -49,7 +49,7 @@ export function ProductIndex({ products }: ProductIndexProps) {
 
             <p className={styles.note}>{product.statusNote}</p>
 
-            <div className={styles.actions}>
+            <div className={`actions ${styles.actions}`}>
               {product.links.map((link, j) => (
                 <ActionLink
                   key={link.href}

@@ -1,19 +1,19 @@
 import Link from "next/link";
-import { site } from "../content/site";
+import { products } from "../content/products";
+import { primaryNav, site } from "../content/site";
+import { ExternalHint, isPageRoute } from "./links";
 import { Wordmark } from "./Wordmark";
 import styles from "./SiteFooter.module.css";
 
-const companyLinks = [
-  { label: "Products", href: "/#products" },
-  { label: "Approach", href: "/#approach" },
-  { label: "Company", href: "/company/" },
-  { label: "Contact", href: "/#contact" },
-];
+const companyLinks = [...primaryNav, { label: "Contact", href: "/#contact" }];
 
-const productLinks = [
-  { label: "Haven", href: "https://heyhaven.ca" },
-  { label: "Haven waitlist", href: "https://tally.so/r/2EoJ9V" },
-];
+// Each product links to its own site by name, followed by its other links.
+const productLinks = products.flatMap((product) =>
+  product.links.map((link, i) => ({
+    label: i === 0 ? product.name : link.label,
+    href: link.href,
+  })),
+);
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -31,11 +31,15 @@ export function SiteFooter() {
 
           <nav className={styles.columns} aria-label="Footer">
             <div>
-              <h2 className="label">EverRoute</h2>
+              <h2 className="label">Company</h2>
               <ul>
                 {companyLinks.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href}>{link.label}</Link>
+                    {isPageRoute(link.href) ? (
+                      <Link href={link.href}>{link.label}</Link>
+                    ) : (
+                      <a href={link.href}>{link.label}</a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -47,7 +51,7 @@ export function SiteFooter() {
                   <li key={link.href}>
                     <a href={link.href}>
                       {link.label}
-                      <span aria-hidden="true"> ↗</span>
+                      <ExternalHint />
                     </a>
                   </li>
                 ))}
@@ -65,7 +69,9 @@ export function SiteFooter() {
         </div>
 
         <div className={styles.bottom}>
-          <p>© {year} EverRoute. All rights reserved.</p>
+          <p>
+            © {year} {site.name}. All rights reserved.
+          </p>
           <p>{site.location}</p>
         </div>
       </div>

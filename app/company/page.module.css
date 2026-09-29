@@ -1,33 +1,16 @@
 .hero {
-  padding-top: clamp(3.5rem, 2rem + 6vw, 7.5rem);
+  padding-top: clamp(2rem, 0.5rem + 4vw, 4.5rem);
   padding-bottom: clamp(3rem, 2rem + 4vw, 6rem);
 }
 
 .title {
   max-width: 20ch;
-  margin: var(--space-4) 0 0;
-  font-family: var(--font-serif);
-  font-size: clamp(2.375rem, 1.5rem + 3.6vw, 4.75rem);
-  font-weight: 400;
-  letter-spacing: -0.015em;
-  line-height: 1.03;
-  text-wrap: balance;
+  margin-top: var(--space-3);
+  font-size: clamp(2.125rem, 1.4rem + 3.7vw, 4.75rem);
 }
 
-.lead {
-  margin-top: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-}
-
-/* Static ground line: same construction as the homepage, without the draw. */
 .ground {
   margin-top: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
-  padding-left: max(var(--gutter), (100% - var(--page-max)) / 2);
-}
-
-.ground::before {
-  display: block;
-  border-top: 1px solid var(--rule-strong);
-  content: "";
 }
 
 .why {
@@ -51,7 +34,7 @@
 .portrait {
   display: block;
   width: 100%;
-  max-width: 360px;
+  max-width: min(280px, 72%);
   height: auto;
 }
 
@@ -70,35 +53,9 @@
 }
 
 .question {
-  margin: var(--space-2) 0 0;
+  margin-top: var(--space-2);
   border-top: 1px solid var(--rule);
   padding-top: var(--space-4);
-}
-
-.question blockquote {
-  margin: 0;
-}
-
-.question blockquote p {
-  margin: 0;
-  font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
-  line-height: 1.22;
-  text-wrap: pretty;
-}
-
-.question blockquote p::before {
-  content: "“";
-}
-
-.question blockquote p::after {
-  content: "”";
-}
-
-.question figcaption {
-  margin-top: var(--space-3);
-  color: var(--ink-3);
-  font-size: var(--text-small);
 }
 
 .principles {
@@ -110,6 +67,10 @@
 }
 
 @media (min-width: 720px) {
+  .portrait {
+    max-width: 360px;
+  }
+
   .founder {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     align-items: start;

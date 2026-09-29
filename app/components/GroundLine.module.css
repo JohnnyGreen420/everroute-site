@@ -1,0 +1,26 @@
+.ground {
+  padding-left: max(var(--gutter), (100% - var(--page-max)) / 2);
+}
+
+.ground::before {
+  display: block;
+  border-top: 1px solid var(--rule-strong);
+  content: "";
+  transform-origin: left center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .draw::before {
+    animation: draw-line 900ms var(--ease) 200ms both;
+  }
+}
+
+@keyframes draw-line {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}

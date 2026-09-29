@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { isPageRoute } from "./links";
 
 type NavLinksProps = {
   links: ReadonlyArray<{ label: string; href: string }>;
@@ -17,18 +18,21 @@ export function NavLinks({ links, className }: NavLinksProps) {
 
   return (
     <ul className={className}>
-      {links.map((link) => (
-        <li key={link.href}>
-          <Link
-            href={link.href}
-            aria-current={
-              trimSlash(link.href) === trimSlash(pathname) ? "page" : undefined
-            }
-          >
-            {link.label}
-          </Link>
-        </li>
-      ))}
+      {links.map((link) => {
+        const current =
+          trimSlash(link.href) === trimSlash(pathname) ? "page" : undefined;
+        return (
+          <li key={link.href}>
+            {isPageRoute(link.href) ? (
+              <Link href={link.href} aria-current={current}>
+                {link.label}
+              </Link>
+            ) : (
+              <a href={link.href}>{link.label}</a>
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 }

@@ -4,23 +4,16 @@
 
 .title {
   max-width: 16ch;
-  margin: var(--space-4) 0 0;
-  font-family: var(--font-serif);
+  margin-top: var(--space-3);
   font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);
-  font-weight: 400;
-  letter-spacing: -0.012em;
-  line-height: 1.02;
-  text-wrap: balance;
 }
 
-.rule {
-  margin-block: var(--space-5) var(--space-4);
-  border-top: 1px solid var(--rule-strong);
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+.body {
+  display: grid;
+  gap: var(--space-4);
   margin-top: var(--space-4);
+}
+
+.ground {
+  margin-top: var(--space-5);
 }

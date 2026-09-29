@@ -1,19 +1,18 @@
+import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
-import { pageMetadata } from "./content/metadata";
+import { homeTitle, pageMetadata } from "./content/metadata";
 import { site } from "./content/site";
-import { display, sans } from "./fonts";
-import "./globals.css";
+import { bodoni, inter } from "./fonts";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "EverRoute — Thoughtful technology, designed to grow with people",
-    template: "%s · EverRoute",
+    default: homeTitle,
+    template: `%s · ${site.name}`,
   },
   ...pageMetadata({
-    title: "EverRoute",
     description:
       "EverRoute is a Canadian technology company in New Brunswick. We are building Haven, a private AI assistant for family life.",
     path: "/",
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f5f0",
+  themeColor: "#f7f5f0", // --canvas
 };
 
 export default function RootLayout({
@@ -30,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-CA" className={`${display.variable} ${sans.variable}`}>
+    <html lang="en-CA" className={`${bodoni.variable} ${inter.variable}`}>
       <body>
         <a className="skip-link" href="#main">
           Skip to content

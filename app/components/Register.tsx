@@ -16,7 +16,13 @@ export function Register({ items, columns = items.length }: RegisterProps) {
   return (
     <dl
       className={styles.register}
-      style={{ "--register-columns": columns } as CSSProperties}
+      data-columns={columns}
+      style={
+        {
+          "--register-columns": columns,
+          "--register-rest": columns - 1,
+        } as CSSProperties
+      }
     >
       {items.map((item) => (
         <div key={item.term} className={styles.item}>

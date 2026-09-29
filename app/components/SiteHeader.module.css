@@ -39,7 +39,8 @@
 
 .links {
   display: flex;
-  gap: var(--space-3);
+  flex-wrap: wrap;
+  gap: 0 var(--space-3);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -50,7 +51,7 @@
   min-height: 48px;
   align-items: center;
   color: var(--ink-2);
-  font-size: 0.9375rem;
+  font-size: var(--text-small);
   font-weight: 500;
   text-decoration: none;
   transition: color 160ms var(--ease);
@@ -67,17 +68,20 @@
   text-underline-offset: 0.45em;
 }
 
-@media (min-width: 720px) {
+/* Sticky only where there is height to spare (not on landscape phones). */
+@media (min-width: 720px) and (min-height: 540px) {
   .header {
     position: sticky;
     top: 0;
     z-index: 40;
   }
+}
 
+@media (min-width: 720px) {
   .bar {
     grid-template-areas: "home nav cta";
     grid-template-columns: 1fr auto auto;
-    min-height: var(--header-h);
+    min-height: 72px;
     column-gap: var(--space-5);
     padding-top: 0;
   }
@@ -88,6 +92,6 @@
   }
 
   .links {
-    gap: var(--space-4);
+    gap: 0 var(--space-4);
   }
 }

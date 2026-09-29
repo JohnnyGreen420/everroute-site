@@ -1,4 +1,6 @@
+import { products } from "../content/products";
 import { site } from "../content/site";
+import { ExternalHint } from "./links";
 import { SectionHeading } from "./SectionHeading";
 import styles from "./ContactBand.module.css";
 
@@ -29,13 +31,19 @@ export function ContactBand({ index }: ContactBandProps) {
           >
             {site.email}
           </a>
-          <p className={styles.routing}>
-            Looking for Haven? Visit{" "}
-            <a className="text-link" href="https://heyhaven.ca">
-              heyhaven.ca
-            </a>
-            .
-          </p>
+          {products.map((product) => {
+            const home = product.links[0];
+            return (
+              <p key={product.id} className={styles.routing}>
+                Looking for {product.name}? Visit{" "}
+                <a className="text-link" href={home.href}>
+                  {new URL(home.href).hostname}
+                  <ExternalHint />
+                </a>
+                .
+              </p>
+            );
+          })}
         </div>
       </div>
     </section>
