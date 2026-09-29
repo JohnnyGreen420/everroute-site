@@ -1,0 +1,110 @@
+/* Hero: the surface */
+
+.hero {
+  padding-top: clamp(2rem, 0.5rem + 4vw, 4.5rem);
+  padding-bottom: clamp(1rem, 0.5rem + 2vw, 2rem);
+}
+
+.heroTitle {
+  max-width: 17ch;
+  margin-top: var(--space-3);
+  font-size: var(--text-hero);
+}
+
+.heroLead {
+  margin-top: clamp(1.25rem, 0.75rem + 1.5vw, 2rem);
+}
+
+.heroActions {
+  margin-top: var(--space-4);
+}
+
+.ground {
+  margin-top: clamp(2rem, 1rem + 2.5vw, 3.5rem);
+}
+
+/* Products: the shelf stands on the boundary between surface and beneath. */
+
+.products {
+  padding-top: clamp(4rem, 2.5rem + 5vw, 7rem);
+}
+
+.shelf {
+  --shelf-pad: clamp(2rem, 1rem + 3vw, 4rem);
+
+  margin-top: var(--space-5);
+  margin-inline: calc(var(--gutter) * -1);
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+  padding: var(--space-5) var(--gutter) var(--space-6);
+}
+
+@media (min-width: 720px) {
+  .shelf {
+    margin-inline: 0;
+    border: 1px solid var(--rule);
+    border-bottom: 0;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    padding: var(--shelf-pad);
+  }
+}
+
+/* Beneath the surface: one change to Root Black carries the rest of the page. */
+
+.beneath {
+  background: var(--night);
+  color: var(--on-night);
+}
+
+.beneath > section + section {
+  padding-top: 0;
+}
+
+/* Land flush under the header: the band carries its own top padding. */
+.approach {
+  scroll-margin-top: -16px;
+}
+
+.commitments {
+  margin-top: var(--space-6);
+}
+
+/* Founder */
+
+.founder {
+  row-gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.founderRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.portrait {
+  display: block;
+  flex: none;
+  width: 72px;
+  height: 96px;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+
+.founderCopy {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 36rem;
+  color: var(--on-night-2);
+}
+
+.founderCopy p {
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .portrait {
+    width: 96px;
+    height: 128px;
+  }
+}

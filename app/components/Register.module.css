@@ -1,0 +1,71 @@
+.register {
+  display: grid;
+  margin: 0;
+}
+
+.item {
+  display: grid;
+  align-content: start;
+  gap: 0.375rem;
+  border-bottom: 1px solid var(--rule);
+  padding-block: var(--space-2);
+}
+
+.item:first-child {
+  padding-top: var(--space-3);
+}
+
+.item dd {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.item dd a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: var(--ink-3);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.item dd a:hover {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+}
+
+/* A link that is the whole value (e.g. the email) gets a 44px+ hit area. */
+.item dd > a:only-child {
+  display: inline-block;
+  padding-block: 0.75rem;
+  margin-block: -0.75rem;
+}
+
+@media (min-width: 720px) {
+  .register {
+    grid-template-columns: repeat(var(--register-columns, 3), minmax(0, 1fr));
+    column-gap: var(--space-4);
+  }
+
+  .register[data-columns="4"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .item,
+  .item:first-child {
+    border-bottom: 0;
+    padding-block: var(--space-3) 0;
+  }
+}
+
+/* From 1024px the first value sits in the label column and the rest start on
+   the same line as the section titles below (the 3/9 split). */
+@media (min-width: 1024px) {
+  .register,
+  .register[data-columns="4"] {
+    grid-template-columns:
+      calc((100% - var(--space-4)) / 4)
+      repeat(var(--register-rest, 2), minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,86 @@
+.hero {
+  padding-top: clamp(2rem, 0.5rem + 4vw, 4.5rem);
+  padding-bottom: clamp(3rem, 2rem + 4vw, 6rem);
+}
+
+.title {
+  max-width: 20ch;
+  margin-top: var(--space-3);
+  font-size: clamp(2.125rem, 1.4rem + 3.7vw, 4.75rem);
+}
+
+.ground {
+  margin-top: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+}
+
+.why {
+  margin-top: var(--space-5);
+  font-size: var(--text-lead);
+  line-height: 1.55;
+}
+
+/* Founder */
+
+.founderSection {
+  background: var(--paper);
+}
+
+.founder {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.portrait {
+  display: block;
+  width: 100%;
+  max-width: min(280px, 72%);
+  height: auto;
+}
+
+.founderCopy {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  max-width: 40rem;
+}
+
+.role {
+  margin: 0;
+  color: var(--ink-3);
+  font-size: var(--text-small);
+  font-weight: 500;
+}
+
+.question {
+  margin-top: var(--space-2);
+  border-top: 1px solid var(--rule);
+  padding-top: var(--space-4);
+}
+
+.principles {
+  margin-top: var(--space-5);
+}
+
+.more {
+  margin: var(--space-4) 0 0;
+}
+
+@media (min-width: 720px) {
+  .portrait {
+    max-width: 360px;
+  }
+
+  .founder {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+    column-gap: var(--space-5);
+  }
+}
+
+@media (min-width: 1024px) {
+  .founder {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+    column-gap: var(--space-4);
+  }
+}

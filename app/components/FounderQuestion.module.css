@@ -1,0 +1,49 @@
+.figure {
+  margin: 0;
+}
+
+.figure blockquote {
+  margin: 0;
+}
+
+.figure blockquote p {
+  max-width: 26ch;
+  margin: 0;
+  font-family: var(--face-display);
+  font-weight: 400;
+}
+
+.large blockquote p {
+  font-size: clamp(1.875rem, 1.35rem + 1.7vw, 3rem);
+  line-height: 1.18;
+}
+
+.medium blockquote p {
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  line-height: 1.22;
+}
+
+.figure blockquote p::before {
+  content: "“";
+}
+
+.figure blockquote p::after {
+  content: "”";
+}
+
+.figure figcaption {
+  margin-top: var(--space-3);
+  color: var(--ink-3);
+  font-size: var(--text-small);
+}
+
+:global(.on-night) .figure figcaption {
+  color: var(--on-night-3);
+}
+
+@media (min-width: 720px) {
+  /* Hang the opening mark so the text keeps one left edge. */
+  .figure blockquote p {
+    text-indent: -0.49em;
+  }
+}

@@ -38,6 +38,8 @@ A successful production build writes the deployable static site to `out/`.
 Important locations include:
 
 - `app/` — active Next.js App Router application
+- `app/components/` and `app/content/` — shared components and site content (facts, products, principles)
+- `tests/` — static-export checks run by `npm test` after a build
 - `public/` — static assets
 - `.github/workflows/build.yml` — GitHub Actions build workflow
 - `docs/` — repository and deployment notes
@@ -133,6 +135,7 @@ npm ci
 npm run lint
 npm run typecheck
 npm run build
+npm test
 git diff --check
 git status --short --branch
 ```
