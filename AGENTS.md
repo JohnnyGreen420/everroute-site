@@ -133,6 +133,7 @@ npm ci
 npm run lint
 npm run typecheck
 npm run build
+npm test
 git diff --check
 git status --short --branch
 ```

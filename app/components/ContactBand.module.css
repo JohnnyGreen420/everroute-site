@@ -1,0 +1,43 @@
+.contact {
+  background: var(--night);
+  color: var(--on-night);
+}
+
+.body {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.lead {
+  max-width: var(--measure);
+  margin: 0;
+  color: var(--on-night-2);
+  font-size: var(--text-lead);
+  line-height: 1.55;
+}
+
+.email {
+  width: fit-content;
+  max-width: 100%;
+  color: var(--on-night);
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 1rem + 3.4vw, 3.75rem);
+  line-height: 1.1;
+  text-decoration-line: underline;
+  text-decoration-color: var(--on-night-3);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  overflow-wrap: anywhere;
+  transition: text-decoration-color 160ms var(--ease);
+}
+
+.email:hover {
+  text-decoration-color: var(--on-night);
+}
+
+.routing {
+  margin: 0;
+  color: var(--on-night-3);
+  font-size: var(--text-small);
+}

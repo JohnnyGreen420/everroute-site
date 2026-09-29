@@ -1,33 +1,27 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { SiteFooter } from "./components/SiteFooter";
+import { SiteHeader } from "./components/SiteHeader";
+import { pageMetadata } from "./content/metadata";
+import { site } from "./content/site";
+import { display, sans } from "./fonts";
 import "./globals.css";
-import "./founder.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://everroute.ca"),
+  metadataBase: new URL(site.url),
   title: {
-    default: "EverRoute - Thoughtful Technology for Real Life",
-    template: "%s - EverRoute",
+    default: "EverRoute — Thoughtful technology, designed to grow with people",
+    template: "%s · EverRoute",
   },
-  description:
-    "EverRoute is a Canadian technology company building calm, practical AI products, including Haven, a private AI assistant for family life.",
-  openGraph: {
-    title: "EverRoute - Thoughtful Technology for Real Life",
+  ...pageMetadata({
+    title: "EverRoute",
     description:
-      "A Canadian technology company building calm, practical AI products for everyday life.",
-    url: "https://everroute.ca",
-    siteName: "EverRoute",
-    locale: "en_CA",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "EverRoute - Thoughtful Technology for Real Life",
-    description:
-      "A Canadian technology company building calm, practical AI products for everyday life.",
-  },
-  alternates: {
-    canonical: "https://everroute.ca",
-  },
+      "EverRoute is a Canadian technology company in New Brunswick. We are building Haven, a private AI assistant for family life.",
+    path: "/",
+  }),
+};
+
+export const viewport: Viewport = {
+  themeColor: "#f7f5f0",
 };
 
 export default function RootLayout({
@@ -36,8 +30,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-CA">
-      <body>{children}</body>
+    <html lang="en-CA" className={`${display.variable} ${sans.variable}`}>
+      <body>
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
+        <SiteHeader />
+        <main id="main" tabIndex={-1}>
+          {children}
+        </main>
+        <SiteFooter />
+      </body>
     </html>
   );
 }

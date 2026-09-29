@@ -1,0 +1,47 @@
+.register {
+  display: grid;
+  margin: 0;
+}
+
+.item {
+  display: grid;
+  gap: 0.375rem;
+  border-bottom: 1px solid var(--rule);
+  padding-block: var(--space-2);
+}
+
+.item:first-child {
+  padding-top: var(--space-3);
+}
+
+.item dd {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.item dd a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: var(--rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.item dd a:hover {
+  text-decoration-color: currentColor;
+}
+
+@media (min-width: 720px) {
+  .register {
+    grid-template-columns: repeat(var(--register-columns, 3), minmax(0, 1fr));
+    column-gap: var(--space-4);
+  }
+
+  .item,
+  .item:first-child {
+    border-bottom: 0;
+    padding-block: var(--space-3) 0;
+  }
+}

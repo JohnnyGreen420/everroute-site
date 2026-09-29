@@ -1,0 +1,186 @@
+/* Hero: the surface */
+
+.hero {
+  padding-top: clamp(3.5rem, 2rem + 6vw, 7.5rem);
+  padding-bottom: clamp(1rem, 0.5rem + 2vw, 2rem);
+}
+
+.heroTitle {
+  max-width: 17ch;
+  margin: var(--space-4) 0 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-hero);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.heroLead {
+  margin-top: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+@media (max-width: 479px) {
+  .heroActions > * {
+    flex: 1 1 100%;
+  }
+}
+
+/*
+ * The ground line: the visible surface above the underlying system. It starts
+ * at the content edge and runs off the right side of the viewport without
+ * using 100vw, so it can never cause horizontal scrolling.
+ */
+.ground {
+  margin-top: clamp(3rem, 2rem + 4vw, 5.5rem);
+  padding-left: max(var(--gutter), (100% - var(--page-max)) / 2);
+}
+
+.ground::before {
+  display: block;
+  border-top: 1px solid var(--rule-strong);
+  content: "";
+  transform-origin: left center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ground::before {
+    animation: draw-line 900ms var(--ease) 200ms both;
+  }
+}
+
+@keyframes draw-line {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Products: the shelf stands on the boundary between surface and beneath. */
+
+.products {
+  padding-top: clamp(4rem, 2.5rem + 5vw, 7rem);
+}
+
+.shelf {
+  margin-top: var(--space-5);
+  margin-inline: calc(var(--gutter) * -1);
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+  padding: var(--space-5) var(--gutter) var(--space-6);
+}
+
+@media (min-width: 720px) {
+  .shelf {
+    margin-inline: 0;
+    border: 1px solid var(--rule);
+    border-bottom: 0;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    padding: clamp(2rem, 1rem + 3vw, 4rem);
+  }
+}
+
+/* Beneath the surface: one change to Root Black carries the rest of the page. */
+
+.beneath {
+  background: var(--night);
+  color: var(--on-night);
+}
+
+.beneath > section + section {
+  padding-top: 0;
+}
+
+.commitments {
+  margin-top: var(--space-6);
+}
+
+/* Founder */
+
+.founder {
+  row-gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.question {
+  margin: 0;
+}
+
+.question blockquote {
+  margin: 0;
+}
+
+.question blockquote p {
+  max-width: 26ch;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.625rem, 1.2rem + 1.7vw, 2.75rem);
+  line-height: 1.18;
+  text-wrap: pretty;
+}
+
+.question blockquote p::before {
+  content: "“";
+}
+
+.question blockquote p::after {
+  content: "”";
+}
+
+.byline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.portrait {
+  display: block;
+  width: 72px;
+  height: 96px;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+
+.bylineName,
+.bylineRole {
+  display: block;
+}
+
+.bylineName {
+  color: var(--on-night);
+  font-weight: 600;
+}
+
+.bylineRole {
+  color: var(--on-night-3);
+  font-size: var(--text-small);
+}
+
+.founderCopy {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 36rem;
+  color: var(--on-night-2);
+}
+
+.founderCopy p {
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .portrait {
+    width: 96px;
+    height: 128px;
+  }
+}
