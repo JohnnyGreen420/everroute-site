@@ -28,7 +28,7 @@ export default function Home() {
           </h1>
           <p className={`lead ${styles.heroLead}`}>
             EverRoute is a Canadian technology company building calm, practical
-            AI products, including Haven, a private AI assistant for family
+            AI products, including ABRI, a private AI assistant for family
             life.
           </p>
           <div className={`actions ${styles.heroActions}`}>

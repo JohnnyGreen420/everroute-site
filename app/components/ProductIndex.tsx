@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Product } from "../content/products";
 import { ActionLink } from "./ActionLink";
 import styles from "./ProductIndex.module.css";
@@ -21,6 +22,15 @@ export function ProductIndex({ products }: ProductIndexProps) {
               {numbered ? `${String(i + 1).padStart(2, "0")} · ` : null}
               An EverRoute product
             </p>
+            {product.logo ? (
+              <Image
+                className={styles.logo}
+                src={product.logo.src}
+                alt=""
+                width={product.logo.width}
+                height={product.logo.height}
+              />
+            ) : null}
             <h3 className={styles.name}>{product.name}</h3>
             <p className={styles.status}>
               <span className={styles.statusMark} aria-hidden="true" />

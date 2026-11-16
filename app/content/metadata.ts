@@ -8,7 +8,7 @@ const socialImage = {
   url: "/og-image.png",
   width: 1200,
   height: 630,
-  alt: "EverRoute, New Brunswick, Canada. A Canadian technology company now building Haven, a private AI assistant for family life.",
+  alt: "EverRoute, New Brunswick, Canada. A Canadian technology company now building ABRI, a private AI assistant for family life.",
 };
 
 type PageMetadataInput = {

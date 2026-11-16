@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   ...pageMetadata({
     description:
-      "EverRoute is a Canadian technology company in New Brunswick. We are building Haven, a private AI assistant for family life.",
+      "EverRoute is a Canadian technology company in New Brunswick. We are building ABRI, a private AI assistant for family life.",
     path: "/",
   }),
 };
