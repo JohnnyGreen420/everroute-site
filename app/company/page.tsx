@@ -15,7 +15,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = pageMetadata({
   title: "Company",
   description:
-    "EverRoute is a Canadian technology company in New Brunswick, founded by Marc Cormier. Haven, a private AI assistant for family life, is in development.",
+    "EverRoute is a Canadian technology company in New Brunswick, founded by Marc Cormier. ABRI, a private AI assistant for family life, is in development.",
   path: "/company/",
 });
 

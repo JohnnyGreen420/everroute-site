@@ -29,6 +29,13 @@
   font-weight: 500;
 }
 
+.logo {
+  display: block;
+  width: 4.5rem;
+  max-width: 100%;
+  height: auto;
+}
+
 .name {
   /* Product names use Inter: the serif belongs to EverRoute itself. */
   margin: 0;

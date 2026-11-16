@@ -5,7 +5,7 @@ type NowBuildingProps = {
   hrefPrefix?: string;
 };
 
-// "Haven, in development" (and further products, when listed), linking to
+// "ABRI, in development" (and further products, when listed), linking to
 // each product's entry in the homepage index.
 export function NowBuilding({ hrefPrefix = "" }: NowBuildingProps) {
   return products.map((product, i) => (

@@ -2,6 +2,7 @@
 // Uses only Node built-ins so the suite adds no dependencies.
 
 import { test } from "node:test";
+import { createHash } from "node:crypto";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
@@ -32,6 +33,7 @@ const BANNED = [
   /get started/i,
   /\bInc\b\.?/,
   /Everroute/, // brand is always "EverRoute"
+  /\bHaven\b/i, // former public product brand must not reappear
   /\bindependent\b/i, // not a published fact about the company
   /\bAlex\b/, // no household details on the public site
   // Lines that implied unannounced products or an undocumented standard.
@@ -231,17 +233,15 @@ for (const [route, file] of Object.entries(PAGES)) {
   });
 }
 
-test("home: Haven is presented as in development with working routes out", () => {
+test("home: ABRI is presented as in development with its public route", () => {
   const html = readPage("index.html");
   const text = visibleText(html);
-  assert.match(text, /Haven/);
+  assert.match(text, /\bABRI\b/);
   assert.match(text, /In development/);
   const hrefs = tags(html, "a").map((a) => attr(a, "href"));
-  assert.ok(hrefs.includes("https://heyhaven.ca"), "links to heyhaven.ca");
-  assert.ok(
-    hrefs.includes("https://tally.so/r/2EoJ9V"),
-    "links to the Haven waitlist",
-  );
+  assert.ok(hrefs.includes("https://heyabri.com"), "links to heyabri.com");
+  assert.ok(!hrefs.includes("https://heyhaven.ca"), "legacy Haven URL removed");
+  assert.ok(!hrefs.includes("https://tally.so/r/2EoJ9V"), "unverified old waitlist removed");
 });
 
 test("home and company: contact route is visible", () => {
@@ -287,4 +287,25 @@ test("404: not indexed and not presented as another page", () => {
   assert.match(meta(html, "robots") ?? "", /noindex/);
   assert.doesNotMatch(html, /<link[^>]+rel="canonical"/);
   assert.equal(meta(html, "og:url"), null, "no og:url on the 404 page");
+});
+
+
+test("home: ABRI reuses the dashboard logo without changing its artwork", () => {
+  const html = readPage("index.html");
+  const logos = tags(html, "img").filter(
+    (img) => attr(img, "src") === "/abri-mark-light.svg",
+  );
+  assert.equal(logos.length, 1, "one ABRI product mark");
+  assert.equal(attr(logos[0], "alt"), "", "adjacent heading names the product");
+  assert.equal(attr(logos[0], "width"), "800");
+  assert.equal(attr(logos[0], "height"), "776");
+  assert.match(html, /id="abri"[\s\S]*?src="\/abri-mark-light\.svg"/);
+  const digest = createHash("sha256")
+    .update(readFileSync(path.join(OUT, "abri-mark-light.svg")))
+    .digest("hex");
+  assert.equal(
+    digest,
+    "1d2ecab4eca6dfa662855eea46bcd6f4831b7ebb047aab7be5f1c76b09c62631",
+    "exact light-background logo from the Family Home Dashboard",
+  );
 });

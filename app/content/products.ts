@@ -12,6 +12,7 @@ export type ProductLink = {
 export type Product = {
   id: string;
   name: string;
+  logo?: { src: string; width: number; height: number };
   summary: string;
   description: string;
   status: ProductStatus;
@@ -23,14 +24,15 @@ export type Product = {
 
 export const products: Product[] = [
   {
-    id: "haven",
-    name: "Haven",
+    id: "abri",
+    name: "ABRI",
+    logo: { src: "/abri-mark-light.svg", width: 800, height: 776 },
     summary: "A private AI assistant for family life.",
     description:
-      "Haven is being built to help households capture what matters, review shared information, organize plans and routines, and recall important details when they are needed.",
+      "ABRI is being built to help households capture what matters, review shared information, organize plans and routines, and recall important details when they are needed.",
     status: "In development",
     statusNote:
-      "Haven is in active development. Product features and availability will evolve as we build and test the experience.",
+      "ABRI is in active development. Product features and availability will evolve as we build and test the experience.",
     focus: [
       "Trusted household memory",
       "Family plans, tasks, and routines",
@@ -38,9 +40,7 @@ export const products: Product[] = [
       "Private by design",
     ],
     links: [
-      { label: "Visit heyhaven.ca", href: "https://heyhaven.ca" },
-      { label: "Join the Haven waitlist", href: "https://tally.so/r/2EoJ9V" },
+      { label: "Visit ABRI", href: "https://heyabri.com" },
     ],
-    linkNote: "The waitlist form is hosted by Tally.",
   },
 ];
