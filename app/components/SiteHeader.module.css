@@ -1,97 +1,108 @@
 .header {
+  z-index: 40;
   border-bottom: 1px solid var(--rule);
   background: var(--canvas);
+  color: var(--ink);
+}
+
+.bar,
+.nav,
+.links,
+.nav a,
+.home {
+  display: flex;
+  align-items: center;
 }
 
 .bar {
-  display: grid;
-  grid-template-areas:
-    "home cta"
-    "nav nav";
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  column-gap: var(--space-3);
-  padding-top: var(--space-1);
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: 72px;
+  gap: 0 1.25rem;
+  padding-block: 0.45rem;
 }
 
-.home {
-  display: inline-flex;
-  grid-area: home;
-  width: fit-content;
-  min-height: 48px;
-  align-items: center;
-  color: var(--ink);
+.home,
+.nav a {
+  min-height: 44px;
   text-decoration: none;
 }
 
-.cta {
-  grid-area: cta;
-  min-height: 44px;
-  padding-inline: 1rem;
-  font-size: 0.875rem;
-}
-
-.nav {
-  grid-area: nav;
-  margin-top: var(--space-1);
-  border-top: 1px solid var(--rule);
-}
-
+.nav,
 .links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 var(--space-3);
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  gap: clamp(1.1rem, 2.6vw, 2.6rem);
+}
+
+.nav a {
+  justify-content: center;
+  font: 550 0.9rem/1.25 var(--face-ui);
 }
 
 .links a {
-  display: inline-flex;
-  min-height: 48px;
-  align-items: center;
-  color: var(--ink-2);
-  font-size: var(--text-small);
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 160ms var(--ease);
+  position: relative;
 }
 
-.links a:hover,
-.links a[aria-current="page"] {
-  color: var(--ink);
+.links a::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0.45rem;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: currentColor;
+  transition: transform 180ms var(--ease);
 }
 
-.links a[aria-current="page"] {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.45em;
+.links a:hover::after,
+.links a[aria-current="page"]::after {
+  transform: scaleX(1);
 }
 
-/* Sticky only where there is height to spare (not on landscape phones). */
+.contact {
+  padding-inline: 1.2rem;
+  border-radius: 99px;
+  background: var(--ink);
+  color: var(--canvas);
+  gap: 0.6rem;
+}
+
+.contact:hover {
+  background: var(--ink-hover);
+}
+
+@media (max-width: 580px) {
+  .bar {
+    min-height: 64px;
+    column-gap: 0.55rem;
+  }
+
+  .nav,
+  .links {
+    gap: clamp(0.6rem, 3vw, 1rem);
+  }
+
+  .nav a {
+    font-size: 0.79rem;
+  }
+
+  .contact {
+    padding-inline: 0.7rem;
+  }
+
+  .contact span {
+    display: none;
+  }
+}
+
+@media (max-width: 350px) {
+  .bar {
+    padding-inline: 0.8rem;
+  }
+}
+
 @media (min-width: 720px) and (min-height: 540px) {
   .header {
     position: sticky;
     top: 0;
-    z-index: 40;
-  }
-}
-
-@media (min-width: 720px) {
-  .bar {
-    grid-template-areas: "home nav cta";
-    grid-template-columns: 1fr auto auto;
-    min-height: 72px;
-    column-gap: var(--space-5);
-    padding-top: 0;
-  }
-
-  .nav {
-    margin-top: 0;
-    border-top: 0;
-  }
-
-  .links {
-    gap: 0 var(--space-4);
   }
 }

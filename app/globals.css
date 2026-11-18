@@ -1,36 +1,23 @@
 /* Preflight and theme only; the site does not use Tailwind utility classes. */
 @import "tailwindcss" source(none);
 
-/*
- * EverRoute design tokens.
- * Palette follows EverRoute Brand System v1.0: warm white and root black,
- * greys for hierarchy, and a single restrained accent (muted gold).
- * Text colours are chosen to meet WCAG AA on their intended surfaces.
- */
+/* Shared corporate palette and typography. */
 :root {
-  /* Surfaces */
-  --canvas: #f7f5f0; /* Warm White */
-  --paper: #ffffff; /* Paper White */
-  --night: #111111; /* Root Black */
-
-  /* Text on light surfaces */
-  --ink: #111111; /* 17.3:1 on canvas */
-  --ink-hover: #2b2a28;
-  --ink-2: #4a4946; /* Graphite, 8.3:1 */
-  --ink-3: #6b6964; /* metadata, 5.0:1 */
-
-  /* Text on dark surfaces */
-  --on-night: #f7f5f0;
-  --on-night-2: #d8d4cb; /* Stone, 12.8:1 on night */
-  --on-night-3: #a8a49a; /* 7.6:1 on night */
-
-  /* Lines */
-  --rule: #d8d4cb; /* Stone */
-  --rule-strong: #111111;
-  --rule-night: #343434;
-
-  /* Accent: used sparingly, never as the only carrier of meaning */
-  --accent: #b38b42; /* Muted Gold, 6.0:1 on night; decorative only on light */
+  --canvas: #ede8dc;
+  --paper: #f2eddf;
+  --sage: #dce5d9;
+  --night: #182f29;
+  --ink: #182f29;
+  --ink-hover: #304b3e;
+  --ink-2: #45574d;
+  --ink-3: #556762;
+  --on-night: #faf6ea;
+  --on-night-2: #e2e8e3;
+  --on-night-3: #c0cecc;
+  --rule: #bec6b7;
+  --rule-strong: #385152;
+  --rule-night: #496166;
+  --accent: #dfc48b;
 
   /* Type */
   --face-display:
@@ -58,8 +45,8 @@
   --section-y: clamp(4.5rem, 3rem + 6vw, 9rem);
 
   /* Layout */
-  --page-max: 1240px;
-  --gutter: clamp(1rem, 0.4rem + 3vw, 2.5rem);
+  --page-max: 1220px;
+  --gutter: clamp(1.25rem, 4.5vw, 4.25rem);
   --measure: 38rem;
   --header-h: 0px; /* sticky header height; set only where it is sticky */
 
@@ -304,10 +291,8 @@ main:focus {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    animation-delay: 0ms !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
     scroll-behavior: auto !important;
   }
 }

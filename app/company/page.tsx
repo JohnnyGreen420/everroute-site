@@ -1,138 +1,122 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ContactBand } from "../components/ContactBand";
-import { FounderQuestion } from "../components/FounderQuestion";
-import { GroundLine } from "../components/GroundLine";
-import { NowBuilding } from "../components/NowBuilding";
-import { PrincipleList } from "../components/PrincipleList";
-import { Register } from "../components/Register";
-import { SectionHeading } from "../components/SectionHeading";
 import { pageMetadata } from "../content/metadata";
-import { beliefs } from "../content/principles";
+import { abri } from "../content/products";
 import { founder, site } from "../content/site";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = pageMetadata({
   title: "Company",
   description:
-    "EverRoute is a Canadian technology company in New Brunswick, founded by Marc Cormier. ABRI, a private AI assistant for family life, is in development.",
+    "Meet Marc Cormier, founder of EverRoute, a Canadian technology company in New Brunswick. See how the question behind the company shapes its work on ABRI.",
   path: "/company/",
 });
 
 export default function CompanyPage() {
   return (
     <>
-      <section className={styles.hero} aria-labelledby="company-title">
-        <div className="container">
-          <p className="label">Company</p>
-          <h1 id="company-title" className={`headline ${styles.title}`}>
-            Building for the space between technical capability and real life.
-          </h1>
-        </div>
-        <GroundLine className={styles.ground} />
-        <div className="container">
-          <Register
-            items={[
-              { term: "Based in", detail: site.location },
-              { term: "Founder", detail: site.founder },
-              { term: "Now building", detail: <NowBuilding hrefPrefix="/" /> },
-              {
-                term: "Contact",
-                detail: <a href={`mailto:${site.email}`}>{site.email}</a>,
-              },
-            ]}
-          />
-        </div>
-      </section>
-
-      <section className="section" aria-labelledby="why-title">
-        <div className="container">
-          <SectionHeading id="why-title" index="01" label="Point of view">
-            Why EverRoute exists
-          </SectionHeading>
-          <div className={`offset ${styles.why}`}>
-            <div className="prose">
-              <p>
-                Many digital tools promise to save time while adding more
-                notifications, more decisions, and more systems to maintain.
-                EverRoute is exploring a different approach.
-              </p>
-              <p>
-                Artificial intelligence is becoming more capable quickly. But
-                capability alone does not make a product helpful, trustworthy,
-                or comfortable to live with.
-              </p>
-              <p>
-                EverRoute exists to turn emerging technical capabilities into
-                products that feel useful in the ordinary moments where life
-                actually happens.
-              </p>
-            </div>
+      <section className={styles.profile} aria-labelledby="company-title">
+        <div className={`container ${styles.spread}`}>
+          <div className={styles.introduction}>
+            <p className={styles.location}>{site.location}</p>
+            <h1 id="company-title" className={styles.title}>
+              Why EverRoute exists<span>.</span>
+            </h1>
+            <p className={styles.lead}>
+              A calendar can hold an appointment. A note can hold the details.
+              Someone still has to put the two together.
+            </p>
+            <p className={styles.story}>
+              As a parent, {site.founder} knows that work firsthand. He founded
+              EverRoute to bring his experience in technology to the problems he
+              kept running into at home.
+            </p>
+            <p className={styles.story}>
+              That experience shapes EverRoute’s work as a technology company.
+              We start with an everyday need and ask what should stay private
+              and what people want to decide for themselves. We’re taking that
+              approach with {abri.name}.
+            </p>
           </div>
-        </div>
-      </section>
-
-      <section
-        className={`section ${styles.founderSection}`}
-        aria-labelledby="founder-title"
-      >
-        <div className="container">
-          <SectionHeading id="founder-title" index="02" label="Founder">
-            {site.founder}
-          </SectionHeading>
-          <div className={styles.founder}>
+          <figure className={styles.portraitFigure}>
             <Image
               className={styles.portrait}
               src="/marc-cormier-900.jpg"
-              alt="Portrait of Marc Cormier, founder of EverRoute"
+              alt="Portrait of Marc Cormier"
               width={900}
               height={1200}
+              loading="eager"
             />
-            <div className={styles.founderCopy}>
-              <p className={styles.role}>Founder, EverRoute</p>
-              <div className="prose">
-                <p>{founder.bio}</p>
-                <p>
-                  Modern life asks people to keep track of work, family
-                  responsibilities, appointments, goals, ideas, health, and
-                  hundreds of unfinished details, often across disconnected apps
-                  and systems.
-                </p>
-              </div>
-              <div className={styles.question}>
-                <FounderQuestion size="medium" />
-              </div>
-            </div>
-          </div>
+            <figcaption className={styles.caption}>
+              <strong>{site.founder}</strong>
+              <span>Founder, EverRoute</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
-      <section className="section" aria-labelledby="principles-title">
-        <div className="container">
-          <SectionHeading
-            id="principles-title"
-            index="03"
-            label="Product principles"
-          >
-            What every EverRoute product should be
-          </SectionHeading>
-          <div className={`offset ${styles.principles}`}>
-            <div>
-              <PrincipleList items={beliefs} />
-              <p className={styles.more}>
-                {/* Native anchor on purpose: next/link does not move keyboard
-                    focus to a fragment target (see app/components/links.tsx). */}
-                {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                <a className="text-link tap-target" href="/#approach">
-                  Our approach
-                </a>
-              </p>
-            </div>
-          </div>
+      <section className={styles.question} aria-labelledby="question-title">
+        <div className={`container ${styles.questionLayout}`}>
+          <h2 id="question-title" className={styles.sectionLabel}>
+            The question behind EverRoute
+          </h2>
+          <blockquote className={styles.quotation}>
+            <p>“{founder.question}”</p>
+          </blockquote>
         </div>
       </section>
 
-      <ContactBand index="04" />
+      <section className={styles.roots} aria-labelledby="roots-title">
+        <div className={["container", styles.rootsLayout].join(" ")}>
+          <div className={styles.rootsCopy}>
+            <p className={styles.sectionLabel}>Our roots</p>
+            <h2 id="roots-title" className={styles.rootsTitle}>Rooted in New Brunswick.</h2>
+            <p>
+              EverRoute is based in New Brunswick. The Saint John River runs
+              through the province we call home. Our work begins here, with
+              real places, real people, and everyday life.
+            </p>
+          </div>
+          <figure className={styles.riverFigure}>
+            <Image
+              className={styles.riverImage}
+              src="/fredericton-wolastoq-aerial.webp"
+              alt="Aerial view of downtown Fredericton beside the Wolastoq (Saint John River), New Brunswick"
+              width={1920}
+              height={1150}
+              loading="lazy"
+            />
+            <figcaption className={styles.riverCredit}>
+              Fredericton and the Wolastoq (Saint John River) · Photo by{" "}
+              <a href="https://commons.wikimedia.org/wiki/File:Fredericton,_New_Brunswick_aerial_view_(cropped).jpg">Quintin Soloviev</a>
+              {" · "}
+              <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+              {" · "}Cropped and converted to WebP.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className={styles.work} aria-labelledby="work-title">
+        <div className={`container ${styles.workLayout}`}>
+          <div>
+            <h2 id="work-title" className={styles.workTitle}>
+              Building {abri.name}
+            </h2>
+            <p className={styles.status}>{abri.status}</p>
+          </div>
+          <div className={styles.workCopy}>
+            <p>
+              {abri.name} is EverRoute’s private AI assistant for family life.
+              We’re designing it to help people make plans together and find the
+              information their household has already shared.
+            </p>
+            <a className={styles.productLink} href={abri.links[0].href}>
+              {abri.links[0].label} <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

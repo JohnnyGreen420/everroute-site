@@ -1,132 +1,104 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ActionLink } from "./components/ActionLink";
-import { ContactBand } from "./components/ContactBand";
-import { FounderQuestion } from "./components/FounderQuestion";
-import { GroundLine } from "./components/GroundLine";
-import { NowBuilding } from "./components/NowBuilding";
-import { PrincipleList } from "./components/PrincipleList";
 import { ProductIndex } from "./components/ProductIndex";
-import { Register } from "./components/Register";
-import { SectionHeading } from "./components/SectionHeading";
-import { commitments } from "./content/principles";
 import { products } from "./content/products";
-import { founder, site } from "./content/site";
+import { site } from "./content/site";
 import styles from "./page.module.css";
 
-// The homepage is a cross-section. The light surface carries what people see:
-// the company statement and its products. Everything below the single change
-// to Root Black is what supports them.
+const approach = [
+  {
+    title: "Notice the friction",
+    body: "A time changes. Someone remembers hearing about it, but the message is buried. We look for moments like this, when a simple task takes more attention than it should.",
+  },
+  {
+    title: "Keep the decision human",
+    body: "We design for privacy by asking what each task needs. To plan a ride, a family may need the appointment time and place. The person going should decide whether to share the reason for the visit.",
+  },
+  {
+    title: "Test it against a real day",
+    body: "We start small and come back to the original problem. If using a tool is another thing to remember, there’s still work to do.",
+  },
+];
+
 export default function Home() {
   return (
     <>
-      <section className={styles.hero} aria-labelledby="hero-title">
-        <div className="container">
-          <p className="label">{site.location}</p>
-          <h1 id="hero-title" className={`headline ${styles.heroTitle}`}>
-            Thoughtful technology, designed to grow with people over time.
-          </h1>
-          <p className={`lead ${styles.heroLead}`}>
-            EverRoute is a Canadian technology company building calm, practical
-            AI products, including ABRI, a private AI assistant for family
-            life.
-          </p>
-          <div className={`actions ${styles.heroActions}`}>
-            <ActionLink href="/#products">See what we’re building</ActionLink>
-            <ActionLink href="/company/" variant="secondary">
-              About EverRoute
-            </ActionLink>
-          </div>
-        </div>
-        <GroundLine draw className={styles.ground} />
-        <div className="container">
-          <Register
-            items={[
-              { term: "Now building", detail: <NowBuilding /> },
-              { term: "Founder", detail: site.founder },
-              {
-                term: "Contact",
-                detail: <a href={`mailto:${site.email}`}>{site.email}</a>,
-              },
-            ]}
+      <section className={`on-night ${styles.hero}`} aria-labelledby="hero-title">
+        <picture className={styles.landscape}>
+          <source media="(max-width: 660px)" srcSet="/st-john-river-sunset-real-mobile.webp" />
+          <Image
+            src="/st-john-river-sunset-real.webp"
+            alt="Sunset over the Saint John River in New Brunswick, reflected beside wooded banks"
+            width={2240}
+            height={992}
+            loading="eager"
+            fetchPriority="high"
           />
+        </picture>
+        <div className={`container ${styles.heroInner}`}>
+          <div className={styles.intro}>
+            <p className={styles.location}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" />
+                <path d="m15.5 7.5-2 6-5 3 2-6z" fill="currentColor" />
+              </svg>
+              {site.location}
+            </p>
+            <h1 id="hero-title">Built for life<br /><em>as it’s lived.</em></h1>
+            <p className={styles.lead}>
+              EverRoute is a technology company building tools for the everyday
+              work of remembering, planning, and making decisions.
+            </p>
+            <div className={styles.actions}>
+              <a className={styles.primary} href="#products">
+                Explore our work <span aria-hidden="true">↓</span>
+              </a>
+              <Link className={styles.secondary} href="/company/">
+                About EverRoute <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+        <p className={styles.photoCredit}>
+          Photo by{" "}
+          <a href="https://commons.wikimedia.org/wiki/File:St_John_River_sunset_new_brunswick.jpg">Jared DenHollander</a>
+          . Cropped and converted to WebP. Crops licensed under{" "}
+          <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+        </p>
+      </section>
+
+      <section id="approach" className={styles.approach} aria-labelledby="approach-title">
+        <div className={`container ${styles.story}`}>
+          <div>
+            <p className={styles.kicker}>Our approach</p>
+            <h2 id="approach-title" className={styles.heading}>Start with a real day.</h2>
+            <p className={styles.originCopy}>
+              EverRoute began with a familiar feeling for founder Marc Cormier.
+              Even when the day’s work is done, there’s still a whole list in
+              your head. That experience shapes what we choose to build.
+            </p>
+            <Link className={styles.byline} href="/company/">
+              <Image src="/marc-cormier-288.jpg" alt="" width={288} height={384} />
+              <span>Meet the founder <span aria-hidden="true">→</span></span>
+            </Link>
+          </div>
+          <div className={styles.principles}>
+            {approach.map((item, index) => (
+              <details name="approach" key={item.title} open={index === 0}>
+                <summary>{item.title}<span aria-hidden="true" /></summary>
+                <p>{item.body}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section
-        id="products"
-        className={styles.products}
-        aria-labelledby="products-title"
-      >
+      <section id="products" className={styles.work} aria-labelledby="work-title">
         <div className="container">
-          <SectionHeading id="products-title" index="01" label="Products">
-            What we’re building
-          </SectionHeading>
-          <div className={styles.shelf}>
-            <ProductIndex products={products} />
-          </div>
+          <h2 id="work-title" className={styles.heading}>What we’re building</h2>
+          <ProductIndex products={products} />
         </div>
       </section>
-
-      <div className={`on-night ${styles.beneath}`}>
-        <section
-          id="approach"
-          className={`section ${styles.approach}`}
-          aria-labelledby="approach-title"
-        >
-          <div className="container">
-            <SectionHeading
-              id="approach-title"
-              index="02"
-              label="Approach"
-              statement
-              intro={
-                <p>
-                  Artificial intelligence is becoming more capable quickly.
-                  Making it helpful, trustworthy, and comfortable to live with
-                  takes deliberate work. Four principles shape how we build.
-                </p>
-              }
-            >
-              Capability is not the same as help.
-            </SectionHeading>
-            <div className={`offset ${styles.commitments}`}>
-              <PrincipleList items={commitments} />
-            </div>
-          </div>
-        </section>
-
-        <section className="section" aria-labelledby="founder-title">
-          <div className="container">
-            <SectionHeading id="founder-title" index="03" label="Founder">
-              {site.founder}
-            </SectionHeading>
-            <div className={`offset ${styles.founder}`}>
-              <FounderQuestion />
-              <div className={styles.founderRow}>
-                {/* Decorative here: the founder is named in the heading above. */}
-                <Image
-                  className={styles.portrait}
-                  src="/marc-cormier-288.jpg"
-                  alt=""
-                  width={288}
-                  height={384}
-                />
-                <div className={styles.founderCopy}>
-                  <p>{founder.bio}</p>
-                  <p>
-                    <Link className="text-link tap-target" href="/company/">
-                      About EverRoute and its founder
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <ContactBand index="04" />
-      </div>
     </>
   );
 }

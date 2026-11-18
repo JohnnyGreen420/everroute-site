@@ -244,15 +244,15 @@ test("home: ABRI is presented as in development with its public route", () => {
   assert.ok(!hrefs.includes("https://tally.so/r/2EoJ9V"), "unverified old waitlist removed");
 });
 
-test("home and company: contact route is visible", () => {
-  for (const file of ["index.html", "company/index.html"]) {
-    const html = readPage(file);
-    assert.match(visibleText(html), /hello@everroute\.ca/);
-    const hrefs = tags(html, "a").map((a) => attr(a, "href"));
-    assert.ok(
-      hrefs.includes("mailto:hello@everroute.ca"),
-      `${file} mailto link`,
-    );
+test("every header reaches the current page's contact footer", () => {
+  for (const file of Object.values(PAGES)) {
+    const html = markup(readPage(file));
+    const header = html.match(/<header\b[^>]*>[\s\S]*?<\/header>/i)?.[0] ?? "";
+    const footer = html.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/i)?.[0] ?? "";
+    assert.ok(tags(header, "a").some((a) => attr(a, "href") === "#contact"), file);
+    assert.equal(attr(tags(footer, "footer")[0] ?? "", "id"), "contact", file);
+    assert.match(visibleText(footer), /hello@everroute\.ca/, file);
+    assert.ok(tags(footer, "a").some((a) => attr(a, "href") === "mailto:hello@everroute.ca"), file);
   }
 });
 
@@ -308,4 +308,31 @@ test("home: ABRI reuses the dashboard logo without changing its artwork", () => 
     "1d2ecab4eca6dfa662855eea46bcd6f4831b7ebb047aab7be5f1c76b09c62631",
     "exact light-background logo from the Family Home Dashboard",
   );
+});
+
+
+test("home: real Saint John River photos have attribution and local assets", () => {
+  const html = readPage("index.html");
+  const imageUrls = tags(html, "img").map((img) => attr(img, "src"));
+  assert.ok(imageUrls.includes("/st-john-river-sunset-real.webp"));
+  assert.ok(html.includes("/st-john-river-sunset-real-mobile.webp"));
+  assert.ok(existsSync(outFile("/st-john-river-sunset-real.webp")));
+  assert.ok(existsSync(outFile("/st-john-river-sunset-real-mobile.webp")));
+  assert.match(visibleText(html), /Jared DenHollander/);
+  assert.match(html, /St_John_River_sunset_new_brunswick\.jpg/);
+  assert.match(html, /creativecommons\.org\/licenses\/by-sa\/4\.0/);
+  assert.match(visibleText(html), /Cropped and converted to WebP/);
+});
+
+test("company: real Fredericton river photograph has attribution and local asset", () => {
+  const html = readPage("company/index.html");
+  const imageUrls = tags(html, "img").map((img) => attr(img, "src"));
+  assert.ok(imageUrls.includes("/fredericton-wolastoq-aerial.webp"));
+  assert.ok(existsSync(outFile("/fredericton-wolastoq-aerial.webp")));
+  assert.match(visibleText(html), /Rooted in New Brunswick/);
+  assert.match(visibleText(html), /Quintin Soloviev/);
+  assert.match(visibleText(html), /Fredericton and the Wolastoq/);
+  assert.match(html, /Fredericton,_New_Brunswick_aerial_view_\(cropped\)\.jpg/);
+  assert.match(html, /creativecommons\.org\/licenses\/by\/4\.0/);
+  assert.doesNotMatch(visibleText(html), /Perth-Andover/);
 });

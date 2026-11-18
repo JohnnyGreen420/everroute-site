@@ -1,28 +1,71 @@
 import Image from "next/image";
 import type { Product } from "../content/products";
-import { ActionLink } from "./ActionLink";
+import { ExternalHint } from "./links";
 import styles from "./ProductIndex.module.css";
 
-type ProductIndexProps = {
-  products: Product[];
-};
+// Successive paper edges grow outward from the area carrying the product mark.
+const reliefLayers = [
+  { scale: 3.15, angle: -16, fill: "#ccd0b9" },
+  { scale: 2.64, angle: -13, fill: "#d2d4bd" },
+  { scale: 2.18, angle: -9, fill: "#dbdbc3" },
+  { scale: 1.8, angle: -5, fill: "#e3e1ca" },
+  { scale: 1.48, angle: -2, fill: "#eae6d1" },
+  { scale: 1.21, angle: 0, fill: "#f1ecd9" },
+  { scale: 1, angle: 2, fill: "#f6f1df" },
+];
 
-// EverRoute's product index. Each entry states what the product is, where it
-// stands, and where it lives. New products are added as entries in
-// app/content/products.ts; numbering appears only once there is more than one.
-export function ProductIndex({ products }: ProductIndexProps) {
-  const numbered = products.length > 1;
+function PaperRelief({ id }: { id: string }) {
+  const contour = `${id}-contour`;
+  const edge = `${id}-edge`;
 
   return (
-    <ol className={styles.index}>
-      {products.map((product, i) => (
-        <li key={product.id} id={product.id} className={styles.entry}>
-          <div className={styles.identity}>
-            <p className={styles.kicker}>
-              {numbered ? `${String(i + 1).padStart(2, "0")} · ` : null}
-              An EverRoute product
-            </p>
-            {product.logo ? (
+    <svg
+      className={styles.relief}
+      viewBox="-300 -214 600 428"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <path
+          id={contour}
+          d="M-117 25C-129-16-103-57-58-84C-17-109 20-112 55-91C92-69 126-40 128-6C130 28 102 51 65 76C29 101-12 115-48 102C-86 89-106 64-117 25Z"
+        />
+        <linearGradient id={edge} x2=".65" y2="1" x1=".35" y1="0">
+          <stop stopColor="#fffdf3" />
+          <stop offset=".5" stopColor="#ecebd7" />
+          <stop offset="1" stopColor="#c4c2a9" />
+        </linearGradient>
+      </defs>
+      {reliefLayers.map(({ scale, angle, fill }) => (
+        <g key={scale} transform={`rotate(${angle}) scale(${scale})`}>
+          <use href={`#${contour}`} y="2.3" fill="#74745e" opacity=".24" />
+          <use
+            href={`#${contour}`}
+            fill={fill}
+            stroke={`url(#${edge})`}
+            strokeWidth="1.2"
+            vectorEffect="non-scaling-stroke"
+          />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+export function ProductIndex({ products }: { products: Product[] }) {
+  return (
+    <div className={styles.index}>
+      {products.map((product) => (
+        <article
+          key={product.id}
+          id={product.id}
+          aria-labelledby={`${product.id}-name`}
+          className={styles.entry}
+        >
+          <div className={styles.cover} aria-hidden="true">
+            <PaperRelief id={product.id} />
+            {product.logo && (
               <Image
                 className={styles.logo}
                 src={product.logo.src}
@@ -30,52 +73,26 @@ export function ProductIndex({ products }: ProductIndexProps) {
                 width={product.logo.width}
                 height={product.logo.height}
               />
-            ) : null}
-            <h3 className={styles.name}>{product.name}</h3>
-            <p className={styles.status}>
-              <span className={styles.statusMark} aria-hidden="true" />
-              <span className="visually-hidden">Status: </span>
-              {product.status}
-            </p>
+            )}
           </div>
 
-          <div className={styles.detail}>
+          <div className={styles.caption}>
+            <p className={styles.status}>{product.status}</p>
+            <h3 className={styles.name} id={`${product.id}-name`}>
+              {product.name}
+            </h3>
             <p className={styles.summary}>{product.summary}</p>
             <p className={styles.description}>{product.description}</p>
-
-            <div>
-              <p className="label" id={`${product.id}-focus`}>
-                Focus areas
-              </p>
-              <ul
-                className={styles.focus}
-                aria-labelledby={`${product.id}-focus`}
-              >
-                {product.focus.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-
-            <p className={styles.note}>{product.statusNote}</p>
-
-            <div className={`actions ${styles.actions}`}>
-              {product.links.map((link, j) => (
-                <ActionLink
-                  key={link.href}
-                  href={link.href}
-                  variant={j === 0 ? "primary" : "secondary"}
-                >
-                  {link.label}
-                </ActionLink>
+            <div className={styles.links}>
+              {product.links.map((link) => (
+                <a key={link.href} href={link.href}>
+                  {link.label} <ExternalHint className={styles.arrow} />
+                </a>
               ))}
             </div>
-            {product.linkNote ? (
-              <p className={styles.linkNote}>{product.linkNote}</p>
-            ) : null}
           </div>
-        </li>
+        </article>
       ))}
-    </ol>
+    </div>
   );
 }

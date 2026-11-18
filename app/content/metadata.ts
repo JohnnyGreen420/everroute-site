@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { site } from "./site";
 
 export const homeTitle =
-  "EverRoute · Thoughtful technology, designed to grow with people over time";
+  "EverRoute · Technology for everyday life";
 
 const socialImage = {
   url: "/og-image.png",
   width: 1200,
   height: 630,
-  alt: "EverRoute, New Brunswick, Canada. A Canadian technology company now building ABRI, a private AI assistant for family life.",
+  alt: "The rooted EverRoute wordmark in cream on forest green. Technology for everyday life. New Brunswick, Canada.",
 };
 
 type PageMetadataInput = {
@@ -44,7 +44,7 @@ export function pageMetadata({
       card: "summary_large_image",
       title: socialTitle,
       description,
-      images: [socialImage.url],
+      images: [socialImage],
     },
   };
 }

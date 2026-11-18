@@ -1,12 +1,9 @@
 import Link from "next/link";
 import { primaryNav } from "../content/site";
-import { ActionLink } from "./ActionLink";
 import { NavLinks } from "./NavLinks";
 import { Wordmark } from "./Wordmark";
 import styles from "./SiteHeader.module.css";
 
-// Four destinations, always visible: one row on wider screens, two rows on
-// phones. No menu toggle, so navigation works without JavaScript.
 export function SiteHeader() {
   return (
     <header className={styles.header}>
@@ -16,10 +13,10 @@ export function SiteHeader() {
         </Link>
         <nav className={styles.nav} aria-label="Primary">
           <NavLinks links={primaryNav} className={styles.links} />
+          <a className={styles.contact} href="#contact">
+            Contact <span aria-hidden="true">↘</span>
+          </a>
         </nav>
-        <ActionLink className={styles.cta} href="/#contact" variant="secondary">
-          Contact
-        </ActionLink>
       </div>
     </header>
   );

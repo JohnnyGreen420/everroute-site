@@ -1,138 +1,161 @@
 .index {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  display: grid;
+  gap: 2rem;
 }
 
 .entry {
   display: grid;
-  gap: var(--space-4);
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  overflow: clip;
+  border: 1px solid #c7c9b8;
+  border-radius: 4px;
+  background: var(--paper);
+  color: #182f29;
 }
 
-.entry + .entry {
-  margin-top: var(--space-5);
-  border-top: 1px solid var(--rule);
-  padding-top: var(--space-5);
-}
-
-.identity {
+.cover {
+  position: relative;
   display: grid;
-  align-content: start;
-  justify-items: start;
-  gap: var(--space-2);
+  isolation: isolate;
+  place-items: center;
+  overflow: hidden;
+  min-height: clamp(22rem, 34vw, 30rem);
+  border-inline-end: 1px solid #c7c9b8;
+  background: #c2c8b2;
 }
 
-.kicker {
-  margin: 0;
-  color: var(--ink-3);
-  font-size: var(--text-small);
-  font-weight: 500;
+.relief {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+}
+
+.cover::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(132deg, #fffff51a, transparent 44%, #62664416);
+  pointer-events: none;
+  content: "";
 }
 
 .logo {
   display: block;
-  width: 4.5rem;
-  max-width: 100%;
+  width: clamp(4.75rem, 20%, 8.5rem);
   height: auto;
 }
 
-.name {
-  /* Product names use Inter: the serif belongs to EverRoute itself. */
-  margin: 0;
-  font-size: clamp(2.25rem, 1.7rem + 2vw, 3.25rem);
-  font-weight: 600;
-  letter-spacing: -0.035em;
-  line-height: 1;
+.caption {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(2.5rem, 4.4vw, 4.75rem);
 }
 
 .status {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin: 0;
-  color: var(--ink);
-  font-size: 0.875rem;
-  font-weight: 540;
-  line-height: 1.4;
-}
-
-/* An open square: in development, not yet solid. */
-.statusMark {
-  width: 9px;
-  height: 9px;
-  border: 1px solid var(--ink);
-}
-
-.detail {
-  display: grid;
-  gap: var(--space-3);
-  max-width: 44rem;
-}
-
-.summary {
-  margin: 0;
-  font-size: var(--text-title);
-  font-weight: 600;
-  letter-spacing: -0.015em;
+  margin: 0 0 1.15rem;
+  color: #61452f;
+  font-size: 0.75rem;
+  font-weight: 580;
+  letter-spacing: 0.025em;
   line-height: 1.3;
 }
 
+.status::before {
+  width: 0.46rem;
+  height: 0.46rem;
+  border-radius: 50%;
+  background: #a5472e;
+  content: "";
+}
+
+.name {
+  margin: 0 0 0.75rem;
+  font-family: var(--face-display);
+  font-size: clamp(3.5rem, 5.5vw, 5.3rem);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.summary {
+  max-width: 24ch;
+  margin: 0;
+  font-size: clamp(1.15rem, 1.65vw, 1.45rem);
+  font-weight: 520;
+  letter-spacing: -0.036em;
+  line-height: 1.35;
+}
+
 .description {
-  margin: 0;
-  color: var(--ink-2);
+  max-width: 39ch;
+  margin: 0.8rem 0 0;
+  color: #455952;
+  font-size: clamp(0.984rem, 1.1vw, 1.0625rem);
+  line-height: 1.65;
 }
 
-.focus {
-  display: grid;
-  margin: var(--space-2) 0 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--rule);
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-block-start: clamp(1rem, 2.1vw, 1.8rem);
 }
 
-.focus li {
-  border-bottom: 1px solid var(--rule);
-  padding-block: 0.75rem;
-  font-weight: 500;
+.links a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.65rem;
+  color: #813d2b;
+  font-size: 0.94rem;
+  font-weight: 630;
+  text-decoration: underline;
+  text-decoration-color: #a47563;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.31em;
 }
 
-.note {
-  max-width: 62ch;
-  margin: 0;
-  border-left: 2px solid var(--accent);
-  padding-left: var(--space-2);
-  color: var(--ink-2);
-  font-size: var(--text-small);
+.arrow {
+  display: inline-grid;
+  width: 1.7rem;
+  height: 1.7rem;
+  place-items: center;
+  border: 1px solid #b78f7c;
+  border-radius: 50%;
+  line-height: 1;
+  transition: transform 180ms ease, background 180ms ease, color 180ms ease;
 }
 
-.actions {
-  margin-top: var(--space-1);
+.links a:is(:hover, :focus-visible) {
+  text-decoration-color: currentColor;
 }
 
-.linkNote {
-  max-width: 62ch;
-  margin: 0;
-  color: var(--ink-3);
-  font-size: var(--text-small);
+.links a:is(:hover, :focus-visible) .arrow {
+  background: #813d2b;
+  color: #fffaf0;
 }
 
-@media (min-width: 640px) {
-  .focus {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--space-4);
+@media (prefers-reduced-motion: no-preference) {
+  .links a:is(:hover, :focus-visible) .arrow { transform: translate(2px, -2px); }
+}
+
+@media (max-width: 47rem) {
+  .entry { grid-template-columns: 1fr; }
+
+  .cover {
+    min-height: 0;
+    height: clamp(13.75rem, 60vw, 22rem);
+    border-inline-end: 0;
+    border-bottom: 1px solid #c7c9b8;
   }
-}
 
-@media (min-width: 1024px) {
-  .entry {
-    /* Put the detail column on the section title line, compensating for the
-       shelf's padding and border (--shelf-pad is set by the page). */
-    grid-template-columns:
-      calc(
-        (100% + 2 * var(--shelf-pad, 0px) + 2px - var(--space-4)) / 4 -
-          var(--shelf-pad, 0px) - 1px
-      )
-      minmax(0, 1fr);
-    column-gap: var(--space-4);
-  }
+  .caption { padding: clamp(1.5rem, 6vw, 2.6rem); }
+  .status { margin-bottom: 0.85rem; }
 }
