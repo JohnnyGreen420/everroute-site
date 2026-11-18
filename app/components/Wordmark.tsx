@@ -1,14 +1,19 @@
+import Image from "next/image";
 import styles from "./Wordmark.module.css";
 
 type WordmarkProps = {
   size?: "header" | "footer";
 };
 
-// Interim typographic wordmark set in Libre Bodoni. Replace the text with the
-// approved header logo (wordmark, ground line, simplified roots) once the
-// vector artwork is final; do not draw roots here.
 export function Wordmark({ size = "header" }: WordmarkProps) {
   return (
-    <span className={`${styles.wordmark} ${styles[size]}`}>EverRoute</span>
+    <Image
+      src={size === "header" ? "/hybrid-c.svg" : "/hybrid-c-reverse.svg"}
+      alt=""
+      width={609}
+      height={180}
+      loading={size === "header" ? "eager" : "lazy"}
+      className={`${styles.wordmark} ${styles[size]}`}
+    />
   );
 }

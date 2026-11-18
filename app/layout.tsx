@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   },
   ...pageMetadata({
     description:
-      "EverRoute is a Canadian technology company in New Brunswick. We are building ABRI, a private AI assistant for family life.",
+      "EverRoute builds technology for everyday life in New Brunswick, Canada. Meet the founder, explore our approach, and see our featured product, ABRI.",
     path: "/",
   }),
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f5f0", // --canvas
+  themeColor: "#ede8dc", // --canvas
 };
 
 export default function RootLayout({
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-CA" className={`${bodoni.variable} ${inter.variable}`}>
-      <body>
+      <body id="top">
         <a className="skip-link" href="#main">
           Skip to content
         </a>

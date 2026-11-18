@@ -1,17 +1,12 @@
 .wordmark {
-  display: inline-block;
-  font-family: var(--face-display);
-  font-weight: 400;
-  letter-spacing: -0.005em;
-  line-height: 1;
-  white-space: nowrap;
+  display: block;
+  height: auto;
 }
 
 .header {
-  font-size: 1.5rem;
+  width: clamp(6.8125rem, 5.5rem + 5.7vw, 9.875rem);
 }
 
 .footer {
-  font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);
-  letter-spacing: -0.012em;
+  width: 7.75rem;
 }
